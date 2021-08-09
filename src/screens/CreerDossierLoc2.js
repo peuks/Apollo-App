@@ -15,8 +15,10 @@ import {
   Switch,
   Image,
 } from 'native-base';
+import style from '../styles/CreerDossierLoc2';
 
 function CreerDossierLoc2({navigation}) {
+  const styles = style();
   const [ouiGarant, setOuiGarant] = useState(false);
   const toggleSwitch = () => {
     setOuiGarant(value => !value);
@@ -230,53 +232,5 @@ function CreerDossierLoc2({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default CreerDossierLoc2;

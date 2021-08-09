@@ -1,32 +1,24 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
-  Button,
-  Icon,
   Image,
-  SearchIcon,
-  SunIcon,
-  ArrowUpIcon,
+  Pressable,
   ArrowBackIcon,
   Input,
-  Stack,
   View,
   ScrollView,
-  Pressable,
-  Modal,
-  Center,
-  CircleIcon,
   SmallCloseIcon,
-  Divider
+  Divider,
 } from 'native-base';
+import FiltreIcon from '../assets/svg/FiltreIcon';
+import style from '../styles/ViewRecherche';
 
 function ViewRecherche({navigation}) {
-  const [showModal, setShowModal] = useState(false);
+
+  const styles = style();
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -44,8 +36,6 @@ function ViewRecherche({navigation}) {
         </Row>
         <Input
           bg="#fff"
-          shadow={8}
-          style={styles.searchBar}
           placeholder="Où voulez-vous vivre ?"
           variant="filled"
           width="70%"
@@ -56,13 +46,15 @@ function ViewRecherche({navigation}) {
           autoFocus={true}
           InputRightElement={<SmallCloseIcon size={6} mr={6} />}
         />
-        <SunIcon onPress={() => navigation.navigate('Filtres')}/>
+        <Pressable onPress={() => navigation.navigate('Filtres')}>
+          <FiltreIcon  />
+        </Pressable>
       </Row>
       <ScrollView>
         <Column mt={4} ml={4} mr={4}>
           <Row space={3}>
             <Image
-              style={{width: 20, height: 20}}
+              style={styles.iconAdress}
               source={require('../assets/icons/localize.png')}
               alt="Localize"
             />
@@ -75,7 +67,7 @@ function ViewRecherche({navigation}) {
           <Divider my={4} />
           <Row space={3}>
             <Image
-              style={{width: 20, height: 20}}
+              style={styles.iconAdress}
               source={require('../assets/icons/localize.png')}
               alt="Localize"
             />
@@ -91,18 +83,5 @@ function ViewRecherche({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  searchBar: {
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default ViewRecherche;

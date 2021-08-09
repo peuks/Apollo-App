@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -22,8 +21,13 @@ import {
   CircleIcon,
   FormControl,
 } from 'native-base';
+import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
+import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
+import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
+import style from '../styles/MessageProContent';
 
 function MessageProContent({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -86,7 +90,7 @@ function MessageProContent({navigation}) {
                 source={require('../assets/images/appart2.jpg')}
                 alt="image base"
                 width={160}
-                height={145}
+                height={149}
                 style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}}
                 onPress={() => navigation.navigate('Propriete')}
               />
@@ -103,20 +107,26 @@ function MessageProContent({navigation}) {
                       1400€
                     </Text>
                     <Row space={5} mt={5}>
-                      <Column alignItems="center" justifyContent="center">
-                        <SunIcon size="sm" />
+                      <Column>
+                        <Box alignItems="center">
+                          <SurfaceSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           120 m2
                         </Text>
                       </Column>
-                      <Column alignItems="center" justifyContent="center">
-                        <SunIcon size="sm" />
+                      <Column>
+                        <Box alignItems="center">
+                          <MeubleSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           Meublé
                         </Text>
                       </Column>
-                      <Column alignItems="center" justifyContent="center">
-                        <SunIcon size="sm" />
+                      <Column>
+                        <Box alignItems="center">
+                          <ChambreSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           3 ch.
                         </Text>
@@ -188,55 +198,5 @@ function MessageProContent({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  input: {
-    elevation: 1,
-    justifyContent: 'flex-end',
-  },
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  accepterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  refuserButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#F53A3A',
-  },
-  textDate: {
-    color: '#0B3D91',
-    textAlign: 'center',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default MessageProContent;

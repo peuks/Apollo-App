@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -11,17 +10,32 @@ import {
   View,
   ScrollView,
   FormControl,
+  Pressable,
   Divider,
-  Select,
-  InfoIcon,
-  CheckIcon,
-  Switch,
-  ArrowUpIcon,
-  Checkbox,
   SunIcon,
 } from 'native-base';
+import MeubleLgIcon from '../assets/svg/MeubleLgIcon';
+import LaverieIcon from '../assets/svg/LaverieIcon';
+import VeloIcon from '../assets/svg/VeloIcon';
+import ConciergeIcon from '../assets/svg/ConciergeIcon';
+import AscenseurIcon from '../assets/svg/AscenseurIcon';
+import GarageIcon from '../assets/svg/GarageIcon';
+import CuisineEquipeeIcon from '../assets/svg/CuisineEquipeeIcon';
+import SalledesportIcon from '../assets/svg/SalledesportIcon';
+import JardinIcon from '../assets/svg/JardinIcon';
+import ParkingIcon from '../assets/svg/ParkingIcon';
+import CaveIcon from '../assets/svg/CaveIcon';
+import GrenierIcon from '../assets/svg/GrenierIcon';
+import InternetIcon from '../assets/svg/InternetIcon';
+import TerrasseIcon from '../assets/svg/TerrasseIcon';
+import LavevaisselleIcon from '../assets/svg/LavevaisselleIcon';
+import BalconIcon from '../assets/svg/BalconIcon';
+import BellevueIcon from '../assets/svg/BellevueIcon';
+import OrientesudIcon from '../assets/svg/OrientesudIcon';
+import style from '../styles/AjoutPropriete3';
 
 function AjoutPropriete3({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -76,141 +90,178 @@ function AjoutPropriete3({navigation}) {
           <Text style={styles.textTown} fontSize={20} my={2}>
             Les agréments
           </Text>
-          <Row justifyContent="space-evenly">
-            <Column alignItems="center" justifyContent="flex-start">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Meublé
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Machine a{"\n"} laver
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Orienté sud
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Belle vue
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Cuisine{"\n"} équipée
-              </Text>
-            </Column>
+          <Row justifyContent="space-between">
+            <Pressable>
+              <Column alignItems="center">
+                <MeubleLgIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Meublé
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <LavevaisselleIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Machine à{"\n"} laver
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <OrientesudIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Orienté sud
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <BellevueIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Belle vue
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <CuisineEquipeeIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Cuisine{"\n"} équipée
+                </Text>
+              </Column>
+            </Pressable>
           </Row>
-          <Row  space={7} justifyContent="flex-start" >
-            <Column alignItems="center" justifyContent="flex-start">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Balcon
-              </Text>
-            </Column>
-            <Column alignItems="center" justifyContent="flex-start">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Terrasse
-              </Text>
-            </Column>
-            <Column alignItems="center" justifyContent="flex-start">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Internet{"\n"}inclus
-              </Text>
-            </Column>
-            <Column alignItems="center" justifyContent="flex-start">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Lave{"\n"}vaisselle
-              </Text>
-            </Column>
-            <Column>
+          <Row space={5} justifyContent="flex-start" >
+            <Pressable>
+              <Column alignItems="center">
+                <BalconIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Balcon
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <TerrasseIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Terrasse
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <InternetIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Internet{"\n"}inclus
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <LavevaisselleIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Lave{"\n"}vaisselle
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
               <View/>
-            </Column>
+            </Pressable>
             
           </Row>
 
           <Text style={styles.textTown} fontSize={20} my={2}>
             Les autres parties
           </Text>
-          <Row  justifyContent="space-evenly">
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Grenier
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Garage
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Cave
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Parking
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Jardin
-              </Text>
-            </Column>
+          <Row justifyContent="space-between">
+            <Pressable>
+              <Column alignItems="center">
+                <GrenierIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Grenier
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <GarageIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Garage
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <CaveIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Cave
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <ParkingIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Parking
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <JardinIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Jardin
+                </Text>
+              </Column>
+            </Pressable>
           </Row>
 
           <Text style={styles.textTown} fontSize={20} my={2}>
             Les plus de votre immeuble
           </Text>
-          <Row  justifyContent="space-between">
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Salle de sport
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Concierge
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Laverie
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Ascenseur
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Local vélo
-              </Text>
-            </Column>
+          <Row justifyContent="space-between">
+            <Pressable>
+              <Column alignItems="center">
+                <SalledesportIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Salle{"\n"}de sport
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <ConciergeIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Concierge
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <LaverieIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Laverie
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <AscenseurIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Ascenseur
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <VeloIcon width={60} height={60} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Local vélo
+                </Text>
+              </Column>
+            </Pressable>
           </Row>
-               
 
           <Button
             size="lg"
@@ -230,58 +281,5 @@ function AjoutPropriete3({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  select: {
-    borderColor: '#000',
-    width: 50,
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    width: 200,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default AjoutPropriete3;

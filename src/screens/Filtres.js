@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -7,9 +6,6 @@ import {
   Row,
   Button,
   Icon,
-  Image,
-  SearchIcon,
-  SunIcon,
   Input,
   View,
   ScrollView,
@@ -18,10 +14,16 @@ import {
   SmallCloseIcon,
   Checkbox,
   FormControl,
-  ArrowUpIcon,
 } from 'native-base';
+import AppartementIcon from '../assets/svg/AppartementIcon';
+import MaisonIcon from '../assets/svg/MaisonIcon';
+import ResidenceEtudiantIcon from '../assets/svg/ResidenceEtudiantIcon';
+import EuroIcon from '../assets/svg/EuroIcon';
+import style from '../styles/Filtres';
 
 function Filtres({navigation}) {
+  const styles = style();
+  
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -54,30 +56,36 @@ function Filtres({navigation}) {
           <Text style={styles.textTown} fontSize={20} mt={4}>
             Nature du bien
           </Text>
-          <Row  space={8} alignItems="center" justifyContent="flex-start">
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="md" style={styles.IconsText} noOfLines={2}>
-                Appartement
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="md" style={styles.IconsText} noOfLines={2}>
-                Maison
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="md" style={styles.IconsText} noOfLines={2}>
-                Res. étudiante
-              </Text>
-            </Column>
+          <Row space={8} alignItems="center" justifyContent="flex-start">
+            <Pressable>
+              <Column alignItems="center">
+                <AppartementIcon width={70} height={70} />
+                <Text fontSize="md" style={styles.IconsText} noOfLines={2}>
+                  Appartement
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <MaisonIcon width={70} height={70} />
+                <Text fontSize="md" style={styles.IconsText} noOfLines={2}>
+                  Maison
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <ResidenceEtudiantIcon width={70} height={70} />
+                <Text fontSize="md" style={styles.IconsText} noOfLines={2}>
+                  Res. étudiante
+                </Text>
+              </Column>
+            </Pressable>
           </Row>
           <Text style={styles.textTown} fontSize={20} mt={5}>
             Nombre de chambres ?
           </Text>
-          <Row mt={6} space={5} alignItems="center" justifyContent="flex-start">
+          <Row space={5} alignItems="center" justifyContent="flex-start">
             <Box
               bg="primary.400"
               p={4}
@@ -124,12 +132,9 @@ function Filtres({navigation}) {
             </Box>
           </Row>
           <Text style={styles.textTown} fontSize={20} mt={5}>
-            Budget
+            Budget ?
           </Text>
-          <Row
-            space={10}
-            alignItems="center"
-            justifyContent="flex-start">
+          <Row space={10} alignItems="center" justifyContent="flex-start">
             <Row space={3}>
               <Text style={{color: '#3F3D56'}} fontSize={20}>
                 Min
@@ -143,7 +148,7 @@ function Filtres({navigation}) {
                 mt={-1}
                 keyboardType="numeric"
                 p={2}
-                InputRightElement="€"
+                InputRightElement={<EuroIcon/>}
               />
             </Row>
 
@@ -159,7 +164,7 @@ function Filtres({navigation}) {
                 height={10}
                 mt={-1}
                 keyboardType="numeric"
-                InputRightElement="€"
+                InputRightElement={<EuroIcon/>}
               />
             </Row>
           </Row>
@@ -233,9 +238,47 @@ function Filtres({navigation}) {
               <Checkbox value="coliving">Coliving</Checkbox>
             </Column>
           </Row>
-          <Text style={styles.textTown} fontSize={20} my={5}>
+          <Text style={styles.textTown} fontSize={20} mt={5}>
             Surface
           </Text>
+          <Row
+            space={10}
+            alignItems="center"
+            justifyContent="flex-start"
+            mb={5}>
+            <Row space={3}>
+              <Text style={{color: '#3F3D56'}} fontSize={20}>
+                Min
+              </Text>
+              <Input
+                type="number"
+                size="sm"
+                style={styles.input}
+                width={90}
+                height={10}
+                mt={-1}
+                keyboardType="numeric"
+                p={2}
+                InputRightElement={<EuroIcon/>}
+              />
+            </Row>
+
+            <Row space={3}>
+              <Text style={{color: '#3F3D56'}} fontSize={20}>
+                Max
+              </Text>
+              <Input
+                type="number"
+                size="sm"
+                style={styles.input}
+                width={90}
+                height={10}
+                mt={-1}
+                keyboardType="numeric"
+                InputRightElement={<EuroIcon/>}
+              />
+            </Row>
+          </Row>
           <Button
             size="lg"
             style={styles.validerButton}
@@ -251,46 +294,5 @@ function Filtres({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-    width: 60,
-    alignItems: 'center',
-  },
-  input: {},
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  validerButton: {
-    width: 190,
-    backgroundColor: '#0B3D91',
-    alignSelf: 'center',
-    marginBottom: 40,
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default Filtres;

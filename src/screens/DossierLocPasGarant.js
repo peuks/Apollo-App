@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -12,8 +11,10 @@ import {
   Divider,
   Image,
 } from 'native-base';
+import style from '../styles/DossierLocPasGarant';
 
 function DossierLocPasGarant({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -75,16 +76,16 @@ function DossierLocPasGarant({navigation}) {
             Utiliser notre outil gratuit
           </Button>
           <Row space={2} alignItems="center" justifyContent="space-between">
-            <Divider style={{width: '40%', opacity: 0.2}} bg="#3F3D56" />
-            <Text fontSize="xs" style={{ opacity: 0.5}}>
+            <Divider style={styles.divider} bg="#3F3D56" />
+            <Text fontSize="xs" style={{opacity: 0.5}}>
               OU
             </Text>
-            <Divider style={{width: '40%', opacity: 0.2}} bg="#3F3D56" />
+            <Divider style={styles.divider} bg="#3F3D56" />
           </Row>
-          <Text px={4} fontSize="xl"  bold style={{textAlign:'left'}}>
+          <Text px={4} fontSize="xl" bold style={{textAlign: 'left'}}>
             Nous réalisons pour vous un état des lieux certifié
           </Text>
-          <Text mt={-3} fontSize="xs" style={{textAlign:'left'}}>
+          <Text mt={-3} fontSize="xs" style={{textAlign: 'left'}}>
             Prestations sécurisées par l'assurance AXA
           </Text>
 
@@ -94,7 +95,7 @@ function DossierLocPasGarant({navigation}) {
             width={115}
             height={81}
           />
-          <Text px={4} fontSize="xl"  bold>
+          <Text px={4} fontSize="xl" bold>
             Offrez le meilleur à votre bien
           </Text>
           <Text fontSize="sm" style={{textAlign: 'center'}}>
@@ -120,34 +121,5 @@ function DossierLocPasGarant({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  select: {
-    borderColor: '#000',
-    width: 50,
-  },
-  suivantButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default DossierLocPasGarant;

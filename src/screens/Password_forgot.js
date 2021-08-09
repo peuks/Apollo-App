@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {
   NativeBaseProvider,
   Text,
@@ -8,8 +7,6 @@ import {
   Row,
   Button,
   Image,
-  Heading,
-  VStack,
   FormControl,
   Input,
   Link,
@@ -18,8 +15,10 @@ import {
   HStack,
   Divider,
 } from 'native-base';
+import style from '../styles/Password_forgot';
 
 function PasswordForgot() {
+  const styles = style();
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
@@ -73,25 +72,5 @@ function PasswordForgot() {
   );
 }
 
-const styles = StyleSheet.create({
-  passwordText: {
-    textAlign: 'center',
-    marginLeft: 40,
-    marginRight: 40,
-  },
-  loginButton: {
-    width: 220,
-    backgroundColor: '#FFF',
-    marginTop:120,
-  },
-  input:{
-    width:330,
-  },
-  image:{
-    width: 230,
-    height: 70,
-    marginTop: 10,
-  },
-});
 
 export default PasswordForgot;

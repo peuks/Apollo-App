@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
@@ -12,16 +12,18 @@ import {
   ScrollView,
   FormControl,
   Divider,
-  Select,
-  InfoIcon,
-  CheckIcon,
-  Switch,
-  ArrowUpIcon,
   Checkbox,
-  SunIcon,
+  Pressable,
 } from 'native-base';
+import PlusIcon from '../assets/svg/PlusIcon';
+import MinusIcon from '../assets/svg/MinusIcon';
+import style from '../styles/AjoutPropriete2';
 
 function AjoutPropriete2({navigation}) {
+  const styles = style();
+  const [piece, setPiece] = useState();
+
+  const [etage, setEtage] = useState();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -76,46 +78,58 @@ function AjoutPropriete2({navigation}) {
           <Text style={styles.textTown} fontSize={20} my={2}>
             Formulaire appartement
           </Text>
-        
+
           <FormControl>
             <Row space={8} alignItems="center" justifyContent="space-between">
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Pièces*
               </Text>
-              <Select
+              <View
                 w={40}
-                placeholder="Studio"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="Studio" value="studio" />
-                <Select.Item label="Studio" value="f" />
-              </Select>
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={piece}
+                  onValueChange={(itemValue, itemIndex) => setPiece(itemValue)}>
+                  <Picker.Item label="Studio" value="studio" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                  <Picker.Item label="10" value="10" />
+                  <Picker.Item label="11" value="11" />
+                </Picker>
+              </View>
             </Row>
           </FormControl>
           <Text style={{color: '#000'}} fontSize={12} mt={-3}>
-              Cuisine, SDB et toilette ne sont pas à prendre en compte.
+            Cuisine, SDB et toilette ne sont pas à prendre en compte.
           </Text>
           <FormControl>
             <Row space={8} alignItems="center" justifyContent="space-between">
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Chambres*
               </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+              <Row space={5}>
+                <Pressable>
+                  <MinusIcon />
+                </Pressable>
+                <Text style={{color: '#000'}} fontSize={18}>
+                  {'1'}
+                </Text>
+                <Pressable>
+                  <PlusIcon />
+                </Pressable>
+              </Row>
             </Row>
           </FormControl>
           <FormControl>
@@ -123,56 +137,35 @@ function AjoutPropriete2({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Salle de bain*
               </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+              <Row space={5}>
+                <Pressable>
+                  <MinusIcon />
+                </Pressable>
+                <Text style={{color: '#000'}} fontSize={18}>
+                  {'1'}
+                </Text>
+                <Pressable>
+                  <PlusIcon />
+                </Pressable>
+              </Row>
             </Row>
           </FormControl>
           <FormControl>
             <Row space={8} alignItems="center" justifyContent="space-between">
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-                Salons/Pièces  à vivre*
+                Salons/Pièces à vivre*
               </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
-            </Row>
-          </FormControl>
-          <FormControl>
-            <Row space={8} alignItems="center" justifyContent="space-between">
-              <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-                Couloirs*
-              </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+              <Row space={5}>
+                <Pressable>
+                  <MinusIcon />
+                </Pressable>
+                <Text style={{color: '#000'}} fontSize={18}>
+                  {'1'}
+                </Text>
+                <Pressable>
+                  <PlusIcon />
+                </Pressable>
+              </Row>
             </Row>
           </FormControl>
           <FormControl>
@@ -180,18 +173,31 @@ function AjoutPropriete2({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Étage du bien*
               </Text>
-              <Select
+              <View
                 w={40}
-                placeholder="RDC"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="RDC" value="rdc" />
-                <Select.Item label="RDC" value="rdc" />
-              </Select>
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etage}
+                  onValueChange={(itemValue, itemIndex) => setEtage(itemValue)}>
+                  <Picker.Item label="RDC" value="rdc" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                  <Picker.Item label="10" value="10" />
+                  <Picker.Item label="11" value="11" />
+                </Picker>
+              </View>
             </Row>
           </FormControl>
 
@@ -208,13 +214,14 @@ function AjoutPropriete2({navigation}) {
             <Input type="number" size="md" style={styles.input} />
           </FormControl>
           <Row space={1}>
-            <Checkbox value="test" accessibilityLabel="This is a dummy checkbox" />
-            <Text style={{color: '#3F3D56'}} fontSize={16} >
+            <Checkbox
+              value="test"
+              accessibilityLabel="This is a dummy checkbox"
+            />
+            <Text style={{color: '#3F3D56'}} fontSize={16}>
               Je ne sais pas
             </Text>
           </Row>
-
-          
 
           <Button
             size="lg"
@@ -234,58 +241,5 @@ function AjoutPropriete2({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  select: {
-    borderColor: '#000',
-    width: 50,
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    width: 200,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default AjoutPropriete2;

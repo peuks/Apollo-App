@@ -1,32 +1,29 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
   Button,
   Icon,
-  Image,
-  SearchIcon,
-  SunIcon,
   ArrowUpIcon,
   ArrowBackIcon,
   Input,
   Stack,
   View,
   ScrollView,
-  Pressable,
-  Modal,
   Center,
-  CircleIcon,
   Select,
   FormControl,
   CheckIcon,
 } from 'native-base';
+import AddpicIcon from '../assets/svg/AddpicIcon';
+import style from '../styles/Compte';
 
 function Compte({navigation}) {
+  const styles = style();
+  const [genre, setgenre] = useState();
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -138,18 +135,23 @@ function Compte({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Genre*
             </FormControl.Label>
-            <Select
-             _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input} 
-              >
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={genre}
+                onValueChange={(itemValue, itemIndex) => setgenre(itemValue)}>
+                <Picker.Item label="Masculin" value="m" />
+                <Picker.Item label="Féminin" value="f" />
+              </Picker>
+            </View>
           </FormControl>
+
           <Text style={styles.textTown} fontSize={20} my={5}>
             Profil public
           </Text>
@@ -162,18 +164,7 @@ function Compte({navigation}) {
               size="md"
               style={styles.input}
               placeholder="Cliquez ici pour ajouter une photo"
-              InputLeftElement={
-                <ArrowUpIcon
-                  size="sm"
-                  m={2}
-                  _light={{
-                    color: 'black',
-                  }}
-                  _dark={{
-                    color: 'gray.300',
-                  }}
-                />
-              }
+              InputLeftElement={<AddpicIcon />}
             />
           </FormControl>
           <FormControl mb={5}>
@@ -214,43 +205,5 @@ function Compte({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  input: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  modifierButton: {
-    width: 280,
-    backgroundColor: '#0B3D91',
-  },
-  supprimerButton: {
-    width: 280,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default Compte;

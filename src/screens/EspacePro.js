@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -8,19 +7,21 @@ import {
   Button,
   Icon,
   Image,
-  SearchIcon,
   SunIcon,
-  ArrowUpIcon,
   ScrollView,
   Pressable,
-  Modal,
-  Center,
-  CircleIcon,
-  Checkbox,
   Switch,
 } from 'native-base';
+import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
+import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
+import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
+import AlarmIcon from '../assets/svg/AlarmIcon';
+import SwitchIcon from '../assets/svg/SwitchIcon';
+import CompteIcon from '../assets/svg/CompteIcon';
+import style from '../styles/EspacePro';
 
-function Espace({navigation}) {
+function EspacePro({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -32,11 +33,9 @@ function Espace({navigation}) {
         mr={2}>
         <Row space={2} alignItems="center">
           <Column alignItems="center">
-            <SunIcon
-              size="md"
-              color="#3F3D56"
-              onPress={() => navigation.navigate('Compte')}
-            />
+            <Pressable onPress={() => navigation.navigate('Compte')}>
+              <CompteIcon/>
+            </Pressable>
             <Text
               color="#3F3D56"
               fontSize={10}
@@ -53,11 +52,9 @@ function Espace({navigation}) {
         </Row>
         <Row space={2}>
           <Column alignItems="center">
-            <SunIcon
-              size="md"
-              color="#3F3D56"
-              onPress={() => navigation.navigate('ViewLoc')}
-            />
+            <Pressable onPress={() => navigation.navigate('ViewLoc')}>
+              <SwitchIcon/>
+            </Pressable>
             <Text color="#3F3D56" fontSize={10} fontWeight="bold">
               Mode locataire
             </Text>
@@ -137,19 +134,25 @@ function Espace({navigation}) {
                 </Text>
                 <Row space={5} mt={5}>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <SurfaceSmIcon color="#3F3D56"/>
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <MeubleSmIcon color="#3F3D56"/>
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <ChambreSmIcon color="#3F3D56"/>
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
                     </Text>
@@ -170,7 +173,7 @@ function Espace({navigation}) {
                       En ligne
                     </Text>
                   </Row>
-                  <SunIcon size="sm" />
+                  <AlarmIcon />
                 </Row>
                 <Button
                   size="sm"
@@ -219,7 +222,7 @@ function Espace({navigation}) {
               py={1}
               px={8}
               m={[4 , 4, 30]}
-              style={{color: '#fff', backgroundColor: '#0B3D91',transform: [{ rotate: "-45deg" }]}}>
+              style={{color: '#fff', backgroundColor: '#0B3D91',}}>
               LOUÉ
             </Text>
             <Row space={8} justifyContent="space-between" px={1} my={5}>
@@ -235,19 +238,25 @@ function Espace({navigation}) {
                 </Text>
                 <Row space={5} mt={5}>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <SurfaceSmIcon color="#3F3D56"/>
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <MeubleSmIcon color="#3F3D56"/>
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <ChambreSmIcon color="#3F3D56"/>
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
                     </Text>
@@ -263,7 +272,7 @@ function Espace({navigation}) {
                       Hors ligne
                     </Text>
                   </Row>
-                  <SunIcon size="sm" />
+                  <AlarmIcon  />
                 </Row>
                 <Button
                   size="sm"
@@ -293,57 +302,4 @@ function Espace({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  ScrollView: {},
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  cardStatistics: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-    height: 105,
-    width: 175,
-  },
-  searchBar: {},
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  detailsButton: {
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-    backgroundColor: '#0B3D91',
-  },
-  editerButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
-
-export default Espace;
+export default EspacePro;

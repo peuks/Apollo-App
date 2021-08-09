@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -14,8 +13,10 @@ import {
   ScrollView,
   FormControl,
 } from 'native-base';
+import style from '../styles/GenererBail';
 
 function GenererBail({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -77,13 +78,5 @@ function GenererBail({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  genererButton: {
-    width: 280,
-    backgroundColor: '#0B3D91',
-  },
-});
 
 export default GenererBail;

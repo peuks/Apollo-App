@@ -1,6 +1,4 @@
 import 'react-native-gesture-handler';
-import {G, Path} from 'react-native-svg';
-import {StyleSheet} from 'react-native';
 import React from 'react';
 import {
   NativeBaseProvider,
@@ -9,13 +7,13 @@ import {
   Column,
   Row,
   Button,
-  Icon,
   Image,
 } from 'native-base';
-
+import style from '../styles/SplashScreen';
 
 function SplashScreen({navigation}) {
-  
+  const styles = style();
+
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#0B3D91" alignItems="center" justifyContent="center">
@@ -38,13 +36,8 @@ function SplashScreen({navigation}) {
         <Column space={6} alignItems="center" ml={6} mr={6}>
           <Image
             source={require('../assets/images/welcome.jpg')}
-            style={{
-              width: 410,
-              height: 100,
-              marginBottom: 30,
-              marginTop: 60,
-            }}
-            alt="welcome image"
+            style={styles.apolloImage}
+            alt="Apollo immo image"
           />
           <Column alignItems="center" ml={6} mr={6} justifyContent="center">
             <Text color="#FFF" fontSize="xl">
@@ -69,7 +62,7 @@ function SplashScreen({navigation}) {
               size="md"
               colorScheme="light">
               <Button
-                style={{width: 140}}
+                style={styles.button}
                 borderRadius="pill"
                 _text={{
                   color: 'white',
@@ -79,7 +72,7 @@ function SplashScreen({navigation}) {
                 Propriétaire
               </Button>
               <Button
-                style={{width: 140}}
+                style={styles.button}
                 borderRadius="pill"
                 _text={{
                   color: 'white',
@@ -95,10 +88,4 @@ function SplashScreen({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    opacity: 0.6,
-    //transform: matrix(0.74, 0.67, -0.67, 0.74, 0, 0),
-  },
-});
 export default SplashScreen;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
@@ -13,14 +13,21 @@ import {
   FormControl,
   Divider,
   Select,
-  InfoIcon,
+  Pressable,
   CheckIcon,
-  Switch,
-  ArrowUpIcon,
   SunIcon,
 } from 'native-base';
+import AppartementIcon from '../assets/svg/AppartementIcon';
+import MaisonIcon from '../assets/svg/MaisonIcon';
+import ResidenceEtudiantIcon from '../assets/svg/ResidenceEtudiantIcon';
+import PlusIcon from '../assets/svg/PlusIcon';
+import MinusIcon from '../assets/svg/MinusIcon';
+import style from '../styles/CreerEtat';
 
 function CreerEtat({navigation}) {
+  const styles = style();
+  const [piece, setPiece] = useState();
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -72,24 +79,30 @@ function CreerEtat({navigation}) {
             Type de bien*
           </Text>
           <Row space={8} alignItems="center" justifyContent="flex-start">
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Appartement
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Maison
-              </Text>
-            </Column>
-            <Column alignItems="center">
-              <SunIcon size="md" />
-              <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
-                Res. étudiante
-              </Text>
-            </Column>
+            <Pressable>
+              <Column alignItems="center">
+                <AppartementIcon width={70} height={70} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Appartement
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <MaisonIcon width={70} height={70} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Maison
+                </Text>
+              </Column>
+            </Pressable>
+            <Pressable>
+              <Column alignItems="center">
+                <ResidenceEtudiantIcon width={70} height={70} />
+                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                  Res. étudiante
+                </Text>
+              </Column>
+            </Pressable>
           </Row>
           <Text style={{color: '#3F3D56'}} fontSize={16} mt={2}>
             Adresse du bien :
@@ -141,18 +154,31 @@ function CreerEtat({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Pièces*
               </Text>
-              <Select
+              <View
                 w={40}
-                placeholder="Studio"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={piece}
+                  onValueChange={(itemValue, itemIndex) => setPiece(itemValue)}>
+                  <Picker.Item label="Studio" value="studio" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                  <Picker.Item label="10" value="10" />
+                  <Picker.Item label="11" value="11" />
+                </Picker>
+              </View>
             </Row>
           </FormControl>
           <FormControl>
@@ -160,18 +186,17 @@ function CreerEtat({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Chambres*
               </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+              <Row space={5}>
+                <Pressable>
+                  <MinusIcon />
+                </Pressable>
+                <Text style={{color: '#000'}} fontSize={18}>
+                  {'1'}
+                </Text>
+                <Pressable>
+                  <PlusIcon />
+                </Pressable>
+              </Row>
             </Row>
           </FormControl>
           <FormControl>
@@ -179,18 +204,17 @@ function CreerEtat({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Salle de bain*
               </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+              <Row space={5}>
+                <Pressable>
+                  <MinusIcon />
+                </Pressable>
+                <Text style={{color: '#000'}} fontSize={18}>
+                  {'1'}
+                </Text>
+                <Pressable>
+                  <PlusIcon />
+                </Pressable>
+              </Row>
             </Row>
           </FormControl>
           <FormControl>
@@ -198,18 +222,17 @@ function CreerEtat({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Salons/Pièces à vivre*
               </Text>
-              <Select
-                w={40}
-                placeholder="1"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.select}>
-                <Select.Item label="1" value="1" />
-                <Select.Item label="2" value="2" />
-              </Select>
+              <Row space={5}>
+                <Pressable>
+                  <MinusIcon />
+                </Pressable>
+                <Text style={{color: '#000'}} fontSize={18}>
+                  {'1'}
+                </Text>
+                <Pressable>
+                  <PlusIcon />
+                </Pressable>
+              </Row>
             </Row>
           </FormControl>
 
@@ -231,54 +254,5 @@ function CreerEtat({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    width: 200,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default CreerEtat;

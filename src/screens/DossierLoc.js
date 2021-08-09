@@ -1,28 +1,26 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
   Button,
-  Icon,
   Image,
-  SearchIcon,
   SunIcon,
-  ArrowUpIcon,
-  Input,
-  Stack,
   View,
   ScrollView,
   Pressable,
   Modal,
   Center,
-  CircleIcon,
 } from 'native-base';
+import ShareIcon from '../assets/svg/ShareIcon';
+import ViewfileIcon from '../assets/svg/ViewfileIcon';
+import StarwhiteIcon from '../assets/svg/StarwhiteIcon';
+import StaryellowIcon from '../assets/svg/StaryellowIcon';
+import style from '../styles/DossierLoc';
 
 function DossierLoc({navigation}) {
+  const styles = style();
   const [showShareModal, setShowShareModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   return (
@@ -175,10 +173,9 @@ function DossierLoc({navigation}) {
         </Row>
         <Row space={2}>
           <Column alignItems="center">
-            <ArrowUpIcon
-              style={{color: '#fff'}}
-              onPress={() => setShowShareModal(true)}
-            />
+            <Pressable onPress={() => setShowShareModal(true)}>
+              <ShareIcon width={35} height={35} color="#fff"/>
+            </Pressable>
           </Column>
         </Row>
       </Row>
@@ -263,10 +260,10 @@ function DossierLoc({navigation}) {
                     </Text>
                     <Text style={{}}>Etudiante, avec garant</Text>
                   </Column>
-                  <Row space={1} justifyContent="center">
-                    <SunIcon size="sm" mt={2} />
+                  <Row space={2} justifyContent="center">
+                    <StaryellowIcon />
                     <Text
-                      mt={2}
+                      mt={-0.5}
                       style={{
                         color: '#000',
                         fontSize: 20,
@@ -350,7 +347,7 @@ function DossierLoc({navigation}) {
                       }}>
                       Pièce d'identité ou passeport
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -365,7 +362,7 @@ function DossierLoc({navigation}) {
                       }}>
                       3 derniers bulletins de salaire
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -380,7 +377,7 @@ function DossierLoc({navigation}) {
                       }}>
                       2 derniers bilans
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -395,7 +392,7 @@ function DossierLoc({navigation}) {
                       }}>
                       Justificatif de domicile
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -410,7 +407,7 @@ function DossierLoc({navigation}) {
                       }}>
                       Avis d'imposition
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -425,7 +422,7 @@ function DossierLoc({navigation}) {
                       }}>
                       Contrat
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -440,7 +437,7 @@ function DossierLoc({navigation}) {
                       }}>
                       Carte d'étudiant
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
                 <Pressable
@@ -455,7 +452,7 @@ function DossierLoc({navigation}) {
                       }}>
                       Quittance de loyer
                     </Text>
-                    <SunIcon size="sm" />
+                    <ViewfileIcon color="#fff" />
                   </Row>
                 </Pressable>
               </Column>
@@ -544,7 +541,7 @@ function DossierLoc({navigation}) {
                         }}>
                         Pièce d'identité ou passeport
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                   <Pressable
@@ -559,7 +556,7 @@ function DossierLoc({navigation}) {
                         }}>
                         3 derniers bulletins de salaire
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                   <Pressable
@@ -574,7 +571,7 @@ function DossierLoc({navigation}) {
                         }}>
                         2 derniers bilans
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                   <Pressable
@@ -589,7 +586,7 @@ function DossierLoc({navigation}) {
                         }}>
                         Justificatif de domicile
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                   <Pressable
@@ -604,7 +601,7 @@ function DossierLoc({navigation}) {
                         }}>
                         Avis d'imposition
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                   <Pressable
@@ -619,7 +616,7 @@ function DossierLoc({navigation}) {
                         }}>
                         Contrat
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                   <Pressable
@@ -634,7 +631,7 @@ function DossierLoc({navigation}) {
                         }}>
                         Quittance de loyer
                       </Text>
-                      <SunIcon size="sm" />
+                      <ViewfileIcon color="#fff" />
                     </Row>
                   </Pressable>
                 </Column>
@@ -642,9 +639,9 @@ function DossierLoc({navigation}) {
             </Box>
             <Column space={4} mb={4}>
               <Row space={2} justifyContent="center">
-                <SunIcon size="sm" mt={2} />
+                <StaryellowIcon />
                 <Text
-                  mt={2}
+                  mt={-0.5}
                   style={{
                     fontSize: 20,
                   }}
@@ -666,11 +663,11 @@ function DossierLoc({navigation}) {
                       <Text style={{color: '#3F3D56'}}>septembre 2020</Text>
                     </Column>
                     <Row space={1}>
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
                     </Row>
                   </Row>
                   <Text
@@ -700,11 +697,11 @@ function DossierLoc({navigation}) {
                       <Text style={{color: '#3F3D56'}}>mai 2020</Text>
                     </Column>
                     <Row space={1}>
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
-                      <SunIcon size="sm" />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
+                      <StaryellowIcon />
+                      <StarwhiteIcon/>
                     </Row>
                   </Row>
                   <Text
@@ -765,55 +762,5 @@ function DossierLoc({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  fileUploadCards: {
-    backgroundColor: '#0B3D91',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  searchBar: {},
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default DossierLoc;

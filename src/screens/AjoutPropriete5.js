@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
@@ -21,8 +21,12 @@ import {
   SunIcon,
   Radio,
 } from 'native-base';
+import style from '../styles/AjoutPropriete5';
 
 function AjoutPropriete5({navigation}) {
+  const styles = style();
+  const [typeChauffage, setTypeChauffage] = useState();
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -81,16 +85,23 @@ function AjoutPropriete5({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Type de chauffage principal*
             </FormControl.Label>
-            <Select
-              _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input}>
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={typeChauffage}
+                onValueChange={(itemValue, itemIndex) =>
+                  setTypeChauffage(itemValue)
+                }>
+                <Picker.Item label="Collectif" value="collectif" />
+                <Picker.Item label="Individuel" value="individuel" />
+              </Picker>
+            </View>
           </FormControl>
           <Text
             style={{
@@ -215,34 +226,5 @@ function AjoutPropriete5({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  select: {
-    borderColor: '#000',
-    width: 50,
-  },
-  suivantButton: {
-    width: 200,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default AjoutPropriete5;

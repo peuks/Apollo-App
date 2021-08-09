@@ -1,20 +1,14 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import Carousel from 'pinar';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
   Button,
-  Icon,
   Image,
   SearchIcon,
   SunIcon,
-  ArrowUpIcon,
-  Input,
-  Stack,
   View,
   ScrollView,
   Pressable,
@@ -22,6 +16,13 @@ import {
   Center,
   CircleIcon,
 } from 'native-base';
+import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
+import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
+import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
+import FiltreIcon from '../assets/svg/FiltreIcon';
+import FavIcon from '../assets/svg/FavIcon';
+import LocationIcon from '../assets/svg/LocationIcon';
+import style from '../styles/Search';
 
 //Modal of contact button
 function modalContacter() {
@@ -91,6 +92,8 @@ function modalContacter() {
 
 function Search({navigation}) {
   const [showModal, setShowModal] = useState(false);
+  const styles = style();
+
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -107,36 +110,26 @@ function Search({navigation}) {
           <View />
         </Row>
         <Pressable
-            style={{
-                elevation:2,
-                backgroundColor:"#fff",
-                borderRadius:30,
-                borderWidth: 1,
-                borderColor: '#fff',
-            }}
-            onPress={() => navigation.navigate('ViewRecherche')}
-            >
+          style={styles.searchBar}
+          onPress={() => navigation.navigate('ViewRecherche')}>
           <Row justifyContent="space-between" space={4} px={3} py={4} mx={8}>
-            <SearchIcon size={4} mt={0.5}/>
-            <Text fontSize="sm">
-              Où voulez-vous vivre ?
-            </Text>
+            <SearchIcon size={4} mt={0.5} />
+            <Text fontSize="sm">Où voulez-vous vivre ?</Text>
           </Row>
         </Pressable>
-
-        <SunIcon onPress={() => navigation.navigate('Filtres')} />
+        <Pressable onPress={() => navigation.navigate('Filtres')}>
+          <FiltreIcon />
+        </Pressable>
       </Row>
 
       <ScrollView>
         <Column mt={2} mx={4}>
           <Row alignItems="center" justifyContent="center" mb={5}>
-            <Image
-              style={{width: 20, height: 20}}
-              source={require('../assets/icons/localize.png')}
-              alt="Localize"
-            />
+            <Pressable onPress={() => navigation.navigate('ViewCarte')}>
+              <LocationIcon />
+            </Pressable>
             <Text
-              style={styles.cartText}
+              bold
               fontSize="sm"
               onPress={() => navigation.navigate('ViewCarte')}>
               Affichage vue Carte
@@ -179,12 +172,15 @@ function Search({navigation}) {
               m={[8, 4, 30]}>
               FAV
             </Text>
+            {/*<Box right={0} top={0} m={[8, 4, 30]}>
+              <FavIcon/>
+            </Box>*/}
             <Row space={5} pl={1} pr={1} mt={5} mb={5}>
               <Column>
                 <Text fontSize="sm" style={styles.textTown}>
                   Strasbourg
                 </Text>
-                <Text fontSize="sm" style={styles.Adress} noOfLines={2}>
+                <Text fontSize="sm" style={styles.textAdress} noOfLines={2}>
                   Place de la République
                 </Text>
                 <Text fontSize="sm" style={styles.textPrice}>
@@ -192,19 +188,25 @@ function Search({navigation}) {
                 </Text>
                 <Row space={5} mt={5}>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <SurfaceSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <MeubleSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <ChambreSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
                     </Text>
@@ -287,19 +289,25 @@ function Search({navigation}) {
                 </Text>
                 <Row space={5} mt={5}>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <SurfaceSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <MeubleSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <ChambreSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
                     </Text>
@@ -368,19 +376,25 @@ function Search({navigation}) {
                 </Text>
                 <Row space={5} mt={5}>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <SurfaceSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <MeubleSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
                     </Text>
                   </Column>
                   <Column>
-                    <SunIcon />
+                    <Box alignItems="center">
+                      <ChambreSmIcon color="#3F3D56" />
+                    </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
                     </Text>
@@ -417,52 +431,5 @@ function Search({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  searchBar: {
-    textAlign: 'center',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default Search;

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -12,8 +11,10 @@ import {
   Divider,
   Image,
 } from 'native-base';
+import style from '../styles/CreerEtatBien';
 
 function CreerEtatBien({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -119,33 +120,5 @@ function CreerEtatBien({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  select: {
-    borderColor: '#000',
-    width: 50,
-  },
-  suivantButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default CreerEtatBien;

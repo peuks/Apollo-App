@@ -1,29 +1,25 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
-  Button,
-  Icon,
   Image,
-  SearchIcon,
   SunIcon,
-  ArrowUpIcon,
-  Input,
-  Stack,
   View,
   ScrollView,
   Pressable,
-  Modal,
-  Center,
-  CircleIcon,
 } from 'native-base';
+import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
+import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
+import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
+import FavredIcon from '../assets/svg/FavredIcon';
+import style from '../styles/Favoris';
 
 function Favoris({navigation}) {
+  const styles = style();
   const [showModal, setShowModal] = useState(false);
+
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -49,9 +45,8 @@ function Favoris({navigation}) {
         </Row>
       </Row>
       <ScrollView>
-        <Column mt={4} mx={4}>
+        <Column my={4} mx={4} space={5}>
           <Pressable
-            mb={5}
             style={styles.cards}
             shadow={6}
             onPress={() => navigation.navigate('Propriete')}>
@@ -60,12 +55,12 @@ function Favoris({navigation}) {
                 source={require('../assets/images/appart2.jpg')}
                 alt="image base"
                 width={160}
-                height={145}
+                height={150}
                 style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}}
                 onPress={() => navigation.navigate('Propriete')}
               />
               <Column>
-                <Row space={5}  >
+                <Row space={5}>
                   <Column p={2}>
                     <Text fontSize="sm" style={styles.textTown}>
                       Strasbourg
@@ -77,20 +72,26 @@ function Favoris({navigation}) {
                       1400€
                     </Text>
                     <Row space={5} mt={5}>
-                      <Column  alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <SurfaceSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           120 m2
                         </Text>
                       </Column>
-                      <Column  alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <MeubleSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           Meublé
                         </Text>
                       </Column>
-                      <Column alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <ChambreSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           3 ch.
                         </Text>
@@ -100,25 +101,24 @@ function Favoris({navigation}) {
                 </Row>
               </Column>
               <Column pr={2} pt={2} justifyContent="flex-start">
-                <SunIcon size="sm" style={{color:'red'}}/>
+                <FavredIcon />
               </Column>
             </Row>
           </Pressable>
           <Pressable
-            mb={5}
             style={styles.cards}
             onPress={() => navigation.navigate('Propriete')}>
             <Row justifyContent="space-between">
               <Image
-                source={require('../assets/images/appart1.jpeg')}
+                source={require('../assets/images/img-appart4.png')}
                 alt="image bas"
                 width={160}
-                height={145}
+                height={150}
                 style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}}
                 onPress={() => navigation.navigate('Propriete')}
               />
               <Column>
-                <Row space={5}  >
+                <Row space={5}>
                   <Column p={2}>
                     <Text fontSize="sm" style={styles.textTown}>
                       Strasbourg
@@ -130,20 +130,26 @@ function Favoris({navigation}) {
                       1400€
                     </Text>
                     <Row space={5} mt={5}>
-                      <Column  alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <SurfaceSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           120 m2
                         </Text>
                       </Column>
-                      <Column  alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <MeubleSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           Meublé
                         </Text>
                       </Column>
-                      <Column alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <ChambreSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           3 ch.
                         </Text>
@@ -153,26 +159,25 @@ function Favoris({navigation}) {
                 </Row>
               </Column>
               <Column pr={2} pt={2} justifyContent="flex-start">
-                <SunIcon size="sm" style={{color:'red'}}/>
+                <FavredIcon />
               </Column>
             </Row>
           </Pressable>
           <Pressable
-            mb={5}
             style={styles.cards}
             shadow={6}
             onPress={() => navigation.navigate('Propriete')}>
             <Row justifyContent="space-between">
               <Image
-                source={require('../assets/images/propriétaire21.png')}
+                source={require('../assets/images/img-appart5.png')}
                 alt="image base"
                 width={160}
-                height={145}
+                height={150}
                 style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}}
                 onPress={() => navigation.navigate('Propriete')}
               />
               <Column>
-                <Row space={5}  >
+                <Row space={5}>
                   <Column p={2}>
                     <Text fontSize="sm" style={styles.textTown}>
                       Strasbourg
@@ -184,20 +189,26 @@ function Favoris({navigation}) {
                       1400€
                     </Text>
                     <Row space={5} mt={5}>
-                      <Column  alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <SurfaceSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           120 m2
                         </Text>
                       </Column>
-                      <Column  alignItems="center" justifyContent="center">
-                        <SunIcon size="sm"/>
+                      <Column>
+                        <Box alignItems="center">
+                          <MeubleSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           Meublé
                         </Text>
                       </Column>
-                      <Column alignItems="center" justifyContent="center">
-                        <SunIcon size="sm" />
+                      <Column>
+                        <Box alignItems="center">
+                          <ChambreSmIcon color="#3F3D56" />
+                        </Box>
                         <Text fontSize="xs" style={styles.IconsText}>
                           3 ch.
                         </Text>
@@ -207,7 +218,7 @@ function Favoris({navigation}) {
                 </Row>
               </Column>
               <Column pr={2} pt={2} justifyContent="flex-start">
-                <SunIcon size="sm" style={{color:'red'}} />
+                <FavredIcon />
               </Column>
             </Row>
           </Pressable>
@@ -216,47 +227,5 @@ function Favoris({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default Favoris;

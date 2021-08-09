@@ -31,6 +31,10 @@ import ViewRecherche from './ViewRecherche';
 import ViewPro from './ViewPro';
 import CreerDossierLoc from './CreerDossierLoc';
 import CreerDossierLoc2 from './CreerDossierLoc2';
+import FavIcon from '../assets/svg/FavIcon';
+import MessageIcon from '../assets/svg/MessageIcon';
+import ProfileIcon from '../assets/svg/ProfileIcon';
+import DossierlocIcon from '../assets/svg/DossierlocIcon';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,27 +46,27 @@ function Recherche() {
       <Stack.Screen
         name="Recherche"
         component={Search}
-        options={{title: 'Recherche',headerShown: false}}
+        options={{title: 'Recherche', headerShown: false}}
       />
       <Stack.Screen
         name="ViewCarte"
         component={ViewCarte}
-        options={{title: 'ViewCarte',headerShown: false}}
+        options={{title: 'ViewCarte', headerShown: false}}
       />
       <Stack.Screen
         name="Propriete"
         component={Propriete}
-        options={{title: 'Propriete',headerShown: false}}
+        options={{title: 'Propriete', headerShown: false}}
       />
       <Stack.Screen
         name="Filtres"
         component={Filtres}
-        options={{title: 'Filtres',headerShown: false}}
+        options={{title: 'Filtres', headerShown: false}}
       />
       <Stack.Screen
         name="ViewRecherche"
         component={ViewRecherche}
-        options={{title: 'ViewRecherche',headerShown: false}}
+        options={{title: 'ViewRecherche', headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -70,12 +74,12 @@ function Recherche() {
 
 //Stack of Screens linked with the Favoris Menu.
 function Favori() {
-   return (
+  return (
     <Stack.Navigator initialRouteName="Favoris">
       <Stack.Screen
         name="Favoris"
         component={Favoris}
-        options={{title: 'Favoris',headerShown: false}}
+        options={{title: 'Favoris', headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -83,27 +87,27 @@ function Favori() {
 
 //Stack of Screens linked with the Dossier Locataire Menu.
 function DossierLocataire() {
-     return (
+  return (
     <Stack.Navigator initialRouteName="DossierLoc">
       <Stack.Screen
         name="DossierLoc"
         component={DossierLoc}
-        options={{title: 'DossierLoc',headerShown: false}}
+        options={{title: 'DossierLoc', headerShown: false}}
       />
       <Stack.Screen
         name="DossierLocDoc"
         component={DossierLocDoc}
-        options={{title: 'DossierLocDoc',headerShown: false}}
+        options={{title: 'DossierLocDoc', headerShown: false}}
       />
       <Stack.Screen
         name="CreerDossierLoc"
         component={CreerDossierLoc}
-        options={{title: 'CreerDossierLoc',headerShown: false}}
+        options={{title: 'CreerDossierLoc', headerShown: false}}
       />
       <Stack.Screen
         name="CreerDossierLoc2"
         component={CreerDossierLoc2}
-        options={{title: 'CreerDossierLoc2',headerShown: false}}
+        options={{title: 'CreerDossierLoc2', headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -119,38 +123,39 @@ function MonEspace() {
       <Stack.Screen
         name="Espace"
         component={Espace}
-        options={{title: 'Espace',headerShown: false}}
+        options={{title: 'Espace', headerShown: false}}
       />
       <Stack.Screen
         name="Compte"
         component={Compte}
-        options={{title: 'Compte',headerShown: false}}
+        options={{title: 'Compte', headerShown: false}}
       />
       <Stack.Screen
         name="EspacePro"
         component={ViewPro}
-        options={{title: 'Espace proprio',headerShown: false}}
+        options={{title: 'Espace proprio', headerShown: false}}
       />
     </Stack.Navigator>
   );
 }
 
+//Function constructing the Locataire TabBar
 function ViewLoc({navigation}) {
   return (
     <NativeBaseProvider>
       <Tab.Navigator
         initialRouteName="Recherche"
         tabBarOptions={{
-          activeTintColor: '#0B3D91', 
-          style:{
-            padding:5,
-            height:60
-            },
-          tabStyle:{
-            paddingTop:8,
-            paddingBottom:8,
-          }}}
-        >
+          activeTintColor: '#0B3D91',
+          style: {
+            padding: 5,
+            height: 60,
+          },
+          tabStyle: {
+            paddingTop: 8,
+            paddingBottom: 8,
+          },
+        }}>
         <Tab.Screen
           name="Recherche"
           component={Recherche}
@@ -164,52 +169,29 @@ function ViewLoc({navigation}) {
           name="Favoris"
           component={Favori}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/fav.png')}
-                alt="MySpace"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <FavIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Dossier Locataire"
           component={DossierLocataire}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/dossier.png')}
-                alt="DossierLocataire"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <DossierlocIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Message"
           component={Connexion}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/message.png')}
-                alt="MySpace"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <MessageIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Mon espace"
           component={MonEspace}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/profile.png')}
-                alt="MySpace"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <ProfileIcon color={color} />,
+            tabBarVisible: true,
           }}
         />
       </Tab.Navigator>
@@ -217,10 +199,4 @@ function ViewLoc({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  appoloIcon: {
-    opacity: 0.6,
-    //transform: matrix(0.74, 0.67, -0.67, 0.74, 0, 0),
-  },
-});
 export default ViewLoc;

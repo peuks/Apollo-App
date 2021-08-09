@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -15,8 +14,11 @@ import {
   CircleIcon,
   Divider,
 } from 'native-base';
+import NewMessageIcon from '../assets/svg/NewMessageIcon';
+import style from '../styles/MessagePro';
 
 function MessagePro({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -69,7 +71,7 @@ function MessagePro({navigation}) {
                   <Text fontSize="md" style={styles.textMessage} bold>
                     Bonjour, Merci pour votre répons...
                   </Text>
-                  <SunIcon style={{color:"#0B3D91"}} size="xs" />
+                  <NewMessageIcon color="#0B3D91"/>
                 </Row>
 
                 <Text fontSize="md" style={styles.textAdress} italic>
@@ -104,7 +106,7 @@ function MessagePro({navigation}) {
                   <Text fontSize="md" style={styles.textMessage} >
                     Bonjour, Merci pour votre réponse...
                   </Text>
-                  <SunIcon style={{color:"#fafafa"}} size="xs" />
+                  <NewMessageIcon/>
                 </Row>
 
                 <Text fontSize="md" style={styles.textAdress} italic>
@@ -139,7 +141,7 @@ function MessagePro({navigation}) {
                   <Text fontSize="md" style={styles.textMessage} >
                     Bonjour, Merci pour votre réponse...
                   </Text>
-                  <SunIcon style={{color:"#fafafa"}} size="xs" />
+                  <NewMessageIcon/>
                 </Row>
 
                 <Text fontSize="md" style={styles.textAdress} italic>
@@ -174,7 +176,7 @@ function MessagePro({navigation}) {
                   <Text fontSize="md" style={styles.textMessage} >
                     Bonjour, Merci pour votre réponse...
                   </Text>
-                  <SunIcon style={{color:"#fafafa"}} size="xs" />
+                  <NewMessageIcon/>
                 </Row>
 
                 <Text fontSize="md" style={styles.textAdress} italic>
@@ -189,24 +191,6 @@ function MessagePro({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  cardMessage: {
-  },
-  textDate: {
-    color: '#7D7D8B',
-  },
-  textName: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#7D7D8B',
-  },
-  textMessage:{
-    
-  },
-  
-});
+
 
 export default MessagePro;

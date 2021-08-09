@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -11,8 +10,10 @@ import {
   View,
   ScrollView,
 } from 'native-base';
+import style from '../styles/AnnonceEnregistree';
 
 function AnnonceEnregistree({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -103,19 +104,5 @@ function AnnonceEnregistree({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  revenirButton: {
-    width: 230,
-    backgroundColor: '#0B3D91',
-  },
-  autreButton: {
-    width: 230,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-});
 
 export default AnnonceEnregistree;

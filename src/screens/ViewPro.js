@@ -36,7 +36,11 @@ import CreerEtatSortie from './CreerEtatSortie';
 import CreerEtatSortie2 from './CreerEtatSortie2';
 import DevisCheckVisit from './DevisCheckVisit';
 import DevisCheckVisit2 from './DevisCheckVisit2';
-
+import MessageIcon from '../assets/svg/MessageIcon';
+import ProfileIcon from '../assets/svg/ProfileIcon';
+import AddIcon from '../assets/svg/AddIcon';
+import ContractIcon from '../assets/svg/ContractIcon';
+import InventoryIcon from '../assets/svg/InventoryIcon';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -246,78 +250,49 @@ function ViewPro({navigation}) {
       <Tab.Navigator
         initialRouteName="Mon espace"
         tabBarOptions={{
-          activeTintColor: '#0B3D91', 
-          style:{
-            padding:5,
-            height:60
-            },
-          tabStyle:{
-            paddingTop:8,
-            paddingBottom:8,
-          }}}>
+          activeTintColor: '#0B3D91',
+          style: {
+            padding: 5,
+            height: 60,
+          },
+          tabStyle: {
+            paddingTop: 8,
+            paddingBottom: 8,
+          },
+        }}>
         <Tab.Screen
           name="Etat des lieux"
           component={EtatDesLieux_}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/etat.png')}
-                alt="MySpace"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <InventoryIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Contrat"
           component={Contrat_}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/contract.png')}
-                alt="Contract"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <ContractIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Ajouter propriété"
           component={AjouterPropriete_}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/add.png')}
-                alt="AddProperty"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <AddIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Message"
           component={Messages}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/message.png')}
-                alt="Message"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <MessageIcon color={color} />,
           }}
         />
         <Tab.Screen
           name="Mon espace"
           component={MonEspace}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={require('../assets/icons/profile.png')}
-                alt="MySpace"
-              />
-            ),
+            tabBarIcon: ({color, size}) => <ProfileIcon color={color} />,
           }}
         />
       </Tab.Navigator>
@@ -325,10 +300,4 @@ function ViewPro({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  appoloIcon: {
-    opacity: 0.6,
-    //transform: matrix(0.74, 0.67, -0.67, 0.74, 0, 0),
-  },
-});
 export default ViewPro;

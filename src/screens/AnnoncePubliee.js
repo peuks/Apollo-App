@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -8,14 +7,13 @@ import {
   Button,
   Image,
   ArrowBackIcon,
-  Input,
-  Switch,
   View,
   ScrollView,
-  FormControl,
 } from 'native-base';
+import style from '../styles/AnnoncePubliee';
 
 function AnnoncePubliee({navigation}) {
+  const styles = style();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -76,13 +74,5 @@ function AnnoncePubliee({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  genererButton: {
-    width: 230,
-    backgroundColor: '#0B3D91',
-  },
-});
 
 export default AnnoncePubliee;

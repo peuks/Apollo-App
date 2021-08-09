@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
@@ -12,13 +12,18 @@ import {
   ScrollView,
   FormControl,
   Divider,
-  Select,
   InfoIcon,
-  CheckIcon,
   Pressable,
 } from 'native-base';
+import style from '../styles/CreationContrat_3';
 
-function CreationContrat_2({navigation}) {
+function CreationContrat_3({navigation}) {
+  const styles = style();
+  const [typeBail, setTypeBail] = useState();
+  const [destination, setDestination] = useState();
+  const [regime, setRegime] = useState();
+  const [modaliteChauffage, setModaliteChauffage] = useState();
+  const [modaliteEau, setModaliteEau] = useState();
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -77,31 +82,31 @@ function CreationContrat_2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Type de bail*{" "} <InfoIcon size="xs" mt={1} />
             </FormControl.Label>
-            <Select
-              _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input}>
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={typeBail}
+                onValueChange={(itemValue, itemIndex) => setTypeBail(itemValue)}>
+                <Picker.Item label="Meublé" value="meuble" />
+                <Picker.Item label="Vide" value="vide" />
+              </Picker>
+            </View>
           </FormControl>
+          {/*
+            Si meublé : durée bail = 9 mois pour un étudiant sinon 1 an
+            Si vide : durée bail = 3 ans   
+          */}
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Durée du bail*
             </FormControl.Label>
-            <Select
-              _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input}>
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <Input size="md" style={styles.input} value="9 mois"/>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
@@ -113,16 +118,21 @@ function CreationContrat_2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Destination des locaux*
             </FormControl.Label>
-            <Select
-              _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input}>
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={destination}
+                onValueChange={(itemValue, itemIndex) => setDestination(itemValue)}>
+                <Picker.Item label="Mixe" value="mixe" />
+                <Picker.Item label="Habitation" value="habitation" />
+              </Picker>
+            </View>
           </FormControl>
 
           <Text style={styles.textTown} fontSize={20} my={2}>
@@ -132,16 +142,21 @@ function CreationContrat_2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Régime juridique de l’immeuble*
             </FormControl.Label>
-            <Select
-              _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input}>
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={regime}
+                onValueChange={(itemValue, itemIndex) => setRegime(itemValue)}>
+                <Picker.Item label="Mono-propriété" value="monopropriete" />
+                <Picker.Item label="Copropriété" value="copropriete" />
+              </Picker>
+            </View>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
@@ -212,7 +227,7 @@ function CreationContrat_2({navigation}) {
               </Text>
             </Pressable>
           </Row>
-          <Row space={4} justifyContent="flex-start">
+          <Row space={4} justifyContent="flex-start" ml={2}>
             <Pressable
               alignItems="center"
               style={{
@@ -315,7 +330,7 @@ function CreationContrat_2({navigation}) {
               </Text>
             </Pressable>
           </Row>
-          <Row space={4} justifyContent="flex-start">
+          <Row space={4} justifyContent="flex-start" ml={2}>
             <Pressable
               alignItems="center"
               style={{
@@ -360,16 +375,41 @@ function CreationContrat_2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Modalité de chauffage de l’appartement ?*
             </FormControl.Label>
-            <Select
-              _selectedItem={{
-                bg: 'teal.600',
-                endIcon: <CheckIcon size={10} />,
-              }}
-              mt={1}
-              style={styles.input}>
-              <Select.Item label="Male" value="m" />
-              <Select.Item label="Female" value="f" />
-            </Select>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={modaliteChauffage}
+                onValueChange={(itemValue, itemIndex) => setModaliteChauffage(itemValue)}>
+                <Picker.Item label="Collectif" value="collectif" />
+                <Picker.Item label="Individuel" value="individuel" />
+              </Picker>
+            </View>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+              Modalité de production d’eau chaude ?*
+            </FormControl.Label>
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={modaliteEau}
+                onValueChange={(itemValue, itemIndex) => setModaliteEau(itemValue)}>
+                <Picker.Item label="Collectif" value="collectif" />
+                <Picker.Item label="Individuel" value="individuel" />
+              </Picker>
+            </View>
           </FormControl>
           <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
             L'appartement est-il raccordé à :
@@ -453,53 +493,4 @@ function CreationContrat_2({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    width: 200,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
-
-export default CreationContrat_2;
+export default CreationContrat_3;

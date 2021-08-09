@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {
   Text,
   Box,
   Column,
   Row,
   Button,
-  Icon,
   Image,
   SunIcon,
   Divider,
@@ -15,8 +14,14 @@ import {
   CircleIcon,
   Switch,
 } from 'native-base';
+import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
+import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
+import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
+import style from '../styles/ProprietePro';
 
 function ProprietePro({navigation}) {
+  const styles = style();
+
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -47,20 +52,14 @@ function ProprietePro({navigation}) {
       <ScrollView>
         <Column mt={1} space={6} ml={3} mr={3}>
           <Column>
-            <Box
-              my={4}
-              alignItems="center"
-              justifyContent="center"
-              style={styles.cards}
-              shadow={4}>
+            <Box my={4} style={styles.cards} shadow={4}>
               <Image
                 source={require('../assets/images/appart2.jpg')}
                 alt="image base"
-                width={401}
                 height={170}
                 roundedTop="lg"
               />
-              <Row space={8} px={1} my={5} justifyContent="flex-start">
+              <Row space={8} px={1} my={5} justifyContent="center">
                 <Column>
                   <Text fontSize="sm" style={styles.textTown}>
                     Strasbourg
@@ -73,19 +72,25 @@ function ProprietePro({navigation}) {
                   </Text>
                   <Row space={5} mt={5}>
                     <Column>
-                      <SunIcon />
+                      <Box alignItems="center">
+                        <SurfaceSmIcon color="#3F3D56" />
+                      </Box>
                       <Text fontSize="xs" style={styles.IconsText}>
                         120 m2
                       </Text>
                     </Column>
                     <Column>
-                      <SunIcon />
+                      <Box alignItems="center">
+                        <MeubleSmIcon color="#3F3D56" />
+                      </Box>
                       <Text fontSize="xs" style={styles.IconsText}>
                         Meublé
                       </Text>
                     </Column>
                     <Column>
-                      <SunIcon />
+                      <Box alignItems="center">
+                        <ChambreSmIcon color="#3F3D56" />
+                      </Box>
                       <Text fontSize="xs" style={styles.IconsText}>
                         3 ch.
                       </Text>
@@ -254,36 +259,20 @@ function ProprietePro({navigation}) {
                 color: '#0B3D91',
               }}
               bold>
-              Afficher toutes les candidatures (12)
+              Afficher toutes les candidatures ({'12'})
             </Text>
 
             <Column space={4} my={5} ml={2} mr={2}>
-              <Text
-                mt={2}
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}
-                bold>
+              <Text mt={2} style={styles.descriptionTitle} bold>
                 Partager ma propriété
               </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: '#3F3D56',
-                  textAlign: 'center',
-                }}>
+              <Text style={styles.descriptionText}>
                 Partagez ce lien pour demander à vos candidats de vous envoyer
                 leur dossier via notre plateforme. Simple, sécurisé et rapide.
               </Text>
               <Button
                 size="lg"
-                style={{
-                  width: 240,
-                  backgroundColor: '#0B3D91',
-                  alignSelf: 'center',
-                  marginBottom: 40,
-                }}
+                style={styles.descriptionButton}
                 borderRadius="pill"
                 _text={{
                   color: '#FFF',
@@ -294,32 +283,16 @@ function ProprietePro({navigation}) {
             </Column>
             <Divider my={3} />
             <Column space={4} my={5} ml={2} mr={2}>
-              <Text
-                mt={2}
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}
-                bold>
+              <Text mt={2} style={styles.descriptionTitle} bold>
                 Créer mon bail
               </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: '#3F3D56',
-                  textAlign: 'center',
-                }}>
+              <Text style={styles.descriptionText}>
                 Créer des contrats en un instant grâce à notre générateur et la
                 télé-signature.
               </Text>
               <Button
                 size="lg"
-                style={{
-                  width: 240,
-                  backgroundColor: '#0B3D91',
-                  alignSelf: 'center',
-                  marginBottom: 40,
-                }}
+                style={styles.descriptionButton}
                 borderRadius="pill"
                 _text={{
                   color: '#FFF',
@@ -331,32 +304,16 @@ function ProprietePro({navigation}) {
 
             <Divider my={3} />
             <Column space={4} my={5} ml={2} mr={2}>
-              <Text
-                mt={2}
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}
-                bold>
+              <Text mt={2} style={styles.descriptionTitle} bold>
                 Créer mon état des lieux
               </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: '#3F3D56',
-                  textAlign: 'center',
-                }}>
+              <Text style={styles.descriptionText}>
                 Utilisez notre outil simple et performant afin de réduire la
                 durée de cette tâche de plus de 50%.
               </Text>
               <Button
                 size="lg"
-                style={{
-                  width: 240,
-                  backgroundColor: '#0B3D91',
-                  alignSelf: 'center',
-                  marginBottom: 40,
-                }}
+                style={styles.descriptionButton}
                 borderRadius="pill"
                 _text={{
                   color: '#FFF',
@@ -371,86 +328,5 @@ function ProprietePro({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  editerButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-    width: 160,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  candidatureCards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 1,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  descriptionTitle: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  descriptionText: {
-    color: '#3F3D56',
-    textAlign: 'justify',
-    alignItems: 'flex-start',
-    width: 360,
-  },
-  container: {
-    flexDirection: 'row',
-  },
-
-  planifierButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  genererButton: {
-    width: 140,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-});
 
 export default ProprietePro;

@@ -1,22 +1,27 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {
   Text,
   Box,
   Column,
   Row,
   Button,
-  Icon,
   Image,
   SunIcon,
   Divider,
   ArrowBackIcon,
   ScrollView,
-  CircleIcon,
   Switch,
 } from 'native-base';
+import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
+import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
+import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
+import ApollomessageIcon from '../assets/svg/ApollomessageIcon';
+import style from '../styles/ProprieteProLouee';
 
 function ProprieteProLouee({navigation}) {
+  const styles = style();
+
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -47,25 +52,19 @@ function ProprieteProLouee({navigation}) {
       <ScrollView>
         <Column mt={1} space={6} ml={3} mr={3}>
           <Column>
-            <Box
-              my={4}
-              alignItems="center"
-              justifyContent="center"
-              style={styles.cards}
-              shadow={4}>
+            <Box my={4} style={styles.cards} shadow={4}>
               <Image
                 source={require('../assets/images/appart2.jpg')}
                 alt="image base"
-                width={401}
                 height={170}
                 roundedTop="lg"
               />
-              <Row space={3} px={1} my={5} justifyContent="flex-start">
-                <Column ml={2}>
+              <Row space={4} px={1} my={5} justifyContent="center">
+                <Column>
                   <Text fontSize="sm" style={styles.textTown}>
                     Strasbourg
                   </Text>
-                  <Text fontSize="sm" style={styles.Adress} noOfLines={2}>
+                  <Text fontSize="sm" style={styles.textAdress} noOfLines={2}>
                     Place de la république
                   </Text>
                   <Text fontSize="sm" style={styles.textPrice}>
@@ -73,26 +72,32 @@ function ProprieteProLouee({navigation}) {
                   </Text>
                   <Row space={5} mt={5}>
                     <Column>
-                      <SunIcon />
+                      <Box alignItems="center">
+                        <SurfaceSmIcon color="#3F3D56" />
+                      </Box>
                       <Text fontSize="xs" style={styles.IconsText}>
                         120 m2
                       </Text>
                     </Column>
                     <Column>
-                      <SunIcon />
+                      <Box alignItems="center">
+                        <MeubleSmIcon color="#3F3D56" />
+                      </Box>
                       <Text fontSize="xs" style={styles.IconsText}>
                         Meublé
                       </Text>
                     </Column>
                     <Column>
-                      <SunIcon />
+                      <Box alignItems="center">
+                        <ChambreSmIcon color="#3F3D56" />
+                      </Box>
                       <Text fontSize="xs" style={styles.IconsText}>
                         3 ch.
                       </Text>
                     </Column>
                   </Row>
                 </Column>
-                <Column space={6} mr={2}>
+                <Column space={6}>
                   <Text
                     fontSize="xs"
                     style={{color: '#000'}}
@@ -141,13 +146,14 @@ function ProprieteProLouee({navigation}) {
                 <Column space={2}>
                   <Row justifyContent="space-between" space={3}>
                     <Image
+                      ml={2}
                       size={70}
                       alt="Contact Image"
                       borderRadius={100}
                       style={{alignSelf: 'center'}}
                       source={require('../assets/images/contact.jpg')}
                     />
-                    <Column alignItems="flex-end">
+                    <Column>
                       <Text fontSize="lg" mb={2}>
                         Contacter votre locataire
                       </Text>
@@ -163,7 +169,7 @@ function ProprieteProLouee({navigation}) {
                         </Text>{' '}
                         sophie.brady@gmail.com
                       </Text>
-                      <Text fontSize={14}>
+                      <Text fontSize={14} alignSelf="flex-end">
                         <Text fontSize={14} bold>
                           Tél. :
                         </Text>{' '}
@@ -172,11 +178,13 @@ function ProprieteProLouee({navigation}) {
                       <Button
                         size="sm"
                         mt={1}
+                        alignSelf="flex-end"
                         style={styles.messageButton}
                         borderRadius="pill"
                         _text={{
                           color: '#FFF',
                         }}
+                        endIcon={<ApollomessageIcon />}
                         onPress={() => navigation.navigate('Message')}>
                         Messagerie Apollo
                       </Button>
@@ -187,32 +195,16 @@ function ProprieteProLouee({navigation}) {
             </Column>
 
             <Column space={4} my={5} ml={2} mr={2}>
-              <Text
-                mt={2}
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}
-                bold>
+              <Text mt={2} style={styles.descriptionTitle} bold>
                 Générer mes 3 dernières quittances
               </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: '#3F3D56',
-                  textAlign: 'center',
-                }}>
+              <Text style={styles.descriptionText}>
                 Créez en quelques secondes une quittance de loyer et envoyez-la
                 à votre locataire.
               </Text>
               <Button
                 size="lg"
-                style={{
-                  width: 240,
-                  backgroundColor: '#0B3D91',
-                  alignSelf: 'center',
-                  marginBottom: 40,
-                }}
+                style={styles.descriptionButton}
                 borderRadius="pill"
                 _text={{
                   color: '#FFF',
@@ -223,32 +215,16 @@ function ProprieteProLouee({navigation}) {
             </Column>
             <Divider my={3} />
             <Column space={4} my={5} ml={2} mr={2}>
-              <Text
-                mt={2}
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}
-                bold>
+              <Text mt={2} style={styles.descriptionTitle} bold>
                 Gérer et collecter mes loyers
               </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: '#3F3D56',
-                  textAlign: 'center',
-                }}>
+              <Text style={styles.descriptionText}>
                 Créez un calendrier de paiements et invitez votre locataire.
                 Vous profiterez de plus de sécurité et de fléxibilité.
               </Text>
               <Button
                 size="lg"
-                style={{
-                  width: 240,
-                  backgroundColor: '#0B3D91',
-                  alignSelf: 'center',
-                  marginBottom: 40,
-                }}
+                style={styles.descriptionButton}
                 borderRadius="pill"
                 _text={{
                   color: '#FFF',
@@ -260,33 +236,17 @@ function ProprieteProLouee({navigation}) {
 
             <Divider my={3} />
             <Column space={4} my={5} ml={2} mr={2}>
-              <Text
-                mt={2}
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}
-                bold>
+              <Text mt={2} style={styles.descriptionTitle} bold>
                 Gérer les diagnostics de mon bien
               </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: '#3F3D56',
-                  textAlign: 'center',
-                }}>
+              <Text style={styles.descriptionText}>
                 Vous pouvez télécharger toute les annexes relatives à votre
                 bien. Nous nous occuperons de les envoyer à votre futur
                 locataire.
               </Text>
               <Button
                 size="lg"
-                style={{
-                  width: 240,
-                  backgroundColor: '#0B3D91',
-                  alignSelf: 'center',
-                  marginBottom: 40,
-                }}
+                style={styles.descriptionButton}
                 borderRadius="pill"
                 _text={{
                   color: '#FFF',
@@ -301,90 +261,5 @@ function ProprieteProLouee({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  editerButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-    width: 160,
-  },
-  messageButton: {
-    width: 160,
-    backgroundColor: '#3B69B6',
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-  cards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  candidatureCards: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 1,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  descriptionTitle: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  descriptionText: {
-    color: '#3F3D56',
-    textAlign: 'justify',
-    alignItems: 'flex-start',
-    width: 360,
-  },
-  container: {
-    flexDirection: 'row',
-  },
-
-  planifierButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  genererButton: {
-    width: 140,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-});
 
 export default ProprieteProLouee;

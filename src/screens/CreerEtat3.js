@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
@@ -11,22 +11,29 @@ import {
   View,
   ScrollView,
   FormControl,
-  Divider,
   Select,
-  InfoIcon,
   CheckIcon,
-  Switch,
-  ArrowUpIcon,
-  Circle,
-  SunIcon,
+  Pressable,
   Modal,
   Center,
   Checkbox,
   CircleIcon,
 } from 'native-base';
+import PlusIcon from '../assets/svg/PlusIcon';
+import MinusIcon from '../assets/svg/MinusIcon';
+import style from '../styles/CreerEtat3';
 
 function CreerEtat3({navigation}) {
+  const styles = style();
   const [showModal, setShowModal] = useState(false);
+
+  const [etatPorte, setEtatPorte] = useState();
+  const [etatFenetre, setEtatFenetre] = useState();
+  const [etatPlafond, setEtatPlafond] = useState();
+  const [etatLit, setEtatLit] = useState();
+  const [etatCouette, setEtatCouette] = useState();
+
+  
   return (
     <Box flex={1} bg="#FFF">
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
@@ -107,7 +114,10 @@ function CreerEtat3({navigation}) {
           </Row>
           <Row space={2}>
             <Text color="#FFF" fontSize={14}>
-              Parties concernées
+              État des lieux : 
+              <Text color="#FFF" fontSize={14} bold>
+                {" chambre 1"} 
+              </Text>
             </Text>
           </Row>
           <Row space={2}>
@@ -136,23 +146,32 @@ function CreerEtat3({navigation}) {
               <Text style={styles.textTown} fontSize={18}>
                 Porte, menuiserie
               </Text>
-              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={18}>
+              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
                 Supprimer
               </Text>
             </Row>
 
             <FormControl>
-              <Select
-                placeholder="État"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatPorte}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatPorte(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -175,23 +194,32 @@ function CreerEtat3({navigation}) {
               <Text style={styles.textTown} fontSize={18}>
                 Fenêtres, volets
               </Text>
-              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={18}>
+              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
                 Supprimer
               </Text>
             </Row>
 
             <FormControl>
-              <Select
-                placeholder="État"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatFenetre}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatFenetre(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -214,23 +242,32 @@ function CreerEtat3({navigation}) {
               <Text style={styles.textTown} fontSize={18}>
                 Plafond
               </Text>
-              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={18}>
+              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
                 Supprimer
               </Text>
             </Row>
 
             <FormControl>
-              <Select
-                placeholder="État"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatPlafond}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatPlafond(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -276,7 +313,7 @@ function CreerEtat3({navigation}) {
               <Text style={styles.textTown} fontSize={18}>
                 Lit
               </Text>
-              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={18}>
+              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
                 Supprimer
               </Text>
             </Row>
@@ -285,52 +322,39 @@ function CreerEtat3({navigation}) {
                 Quantité*
               </Text>
               <Row space={8}>
-                <Circle
-                  size={21}
-                  style={{backgroundColor: '#0B3D91'}}
-                  justifyContent="center">
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                    }}
-                    fontSize={22}>
-                    -
-                  </Text>
-                </Circle>
+                <Pressable>
+                  <MinusIcon/>
+                </Pressable>
                 <Text style={{color: '#000'}} fontSize={18}>
                   {'1'}
                 </Text>
-                <Circle
-                  size={21}
-                  style={{backgroundColor: '#0B3D91'}}
-                  justifyContent="center">
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                    }}
-                    fontSize={22}>
-                    +
-                  </Text>
-                </Circle>
+                <Pressable>
+                  <PlusIcon/>
+                </Pressable>
               </Row>
             </Row>
 
             <FormControl>
-              <Select
-                placeholder="État"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatLit}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatLit(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -353,7 +377,7 @@ function CreerEtat3({navigation}) {
               <Text style={styles.textTown} fontSize={18}>
                 Couette
               </Text>
-              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={18}>
+              <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
                 Supprimer
               </Text>
             </Row>
@@ -362,52 +386,39 @@ function CreerEtat3({navigation}) {
                 Quantité*
               </Text>
               <Row space={8}>
-                <Circle
-                  size={21}
-                  style={{backgroundColor: '#0B3D91'}}
-                  justifyContent="center">
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                    }}
-                    fontSize={22}>
-                    -
-                  </Text>
-                </Circle>
+                <Pressable>
+                  <MinusIcon/>
+                </Pressable>
                 <Text style={{color: '#000'}} fontSize={18}>
                   {'1'}
                 </Text>
-                <Circle
-                  size={21}
-                  style={{backgroundColor: '#0B3D91'}}
-                  justifyContent="center">
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                    }}
-                    fontSize={22}>
-                    +
-                  </Text>
-                </Circle>
+                <Pressable>
+                  <PlusIcon/>
+                </Pressable>
               </Row>
             </Row>
 
             <FormControl>
-              <Select
-                placeholder="État"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatCouette}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatCouette(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -518,81 +529,5 @@ function CreerEtat3({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    width: 340,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-  //Candidater1 modal
-  candidatermodalHeader: {
-    fontSize: 20,
-    marginBottom: 5,
-    color: '#225FC7',
-  },
-  candidatermodalTitle: {
-    fontSize: 15,
-    textAlign: 'left',
-    marginBottom: 10,
-  },
-  candidatermodalText: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-  inscrireButton: {
-    width: 140,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  fermerButton: {
-    width: 140,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-});
 
 export default CreerEtat3;

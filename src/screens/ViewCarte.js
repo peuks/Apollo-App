@@ -1,24 +1,22 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
-  Button,
-  Icon,
   Image,
   SearchIcon,
   SunIcon,
-  ArrowUpIcon,
-  Input,
-  Stack,
   View,
   Pressable,
 } from 'native-base';
+import FiltreIcon from '../assets/svg/FiltreIcon';
+import ListIcon from '../assets/svg/ListIcon';
+import style from '../styles/ViewCarte';
 
 function ViewCarte({navigation}) {
+  const styles = style();
+
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -35,33 +33,24 @@ function ViewCarte({navigation}) {
           <View />
         </Row>
         <Pressable
-            style={{
-                elevation:2,
-                backgroundColor:"#fff",
-                borderRadius:30,
-                borderWidth: 1,
-                borderColor: '#fff',
-            }}
-            onPress={() => navigation.navigate('ViewRecherche')}
-            >
+          style={styles.searchBar}
+          onPress={() => navigation.navigate('ViewRecherche')}>
           <Row justifyContent="space-between" space={4} px={3} py={4} mx={8}>
-            <SearchIcon size={4} mt={0.5}/>
-            <Text fontSize="sm">
-              Où voulez-vous vivre ?
-            </Text>
+            <SearchIcon size={4} mt={0.5} />
+            <Text fontSize="sm">Où voulez-vous vivre ?</Text>
           </Row>
         </Pressable>
-        <SunIcon />
+        <Pressable onPress={() => navigation.navigate('Filtres')}>
+          <FiltreIcon  />
+        </Pressable>
       </Row>
       <Column mt={1} space={5}>
         <Row alignItems="center" justifyContent="center" space={2}>
-          <Image
-            style={{width: 20, height: 20}}
-            source={require('../assets/icons/icone-liste.png')}
-            alt="Localize"
-          />
+          <Pressable onPress={() => navigation.navigate('Recherche')}>
+              <ListIcon />
+          </Pressable>
           <Text
-            style={styles.cartText}
+            bold
             fontSize="sm"
             onPress={() => navigation.navigate('Recherche')}>
             Affichage vue liste
@@ -79,47 +68,5 @@ function ViewCarte({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {},
-  searchBar: {
-    borderColor: '#000',
-  },
-  searchBar: {
-    textAlign: 'center',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default ViewCarte;

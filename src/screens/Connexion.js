@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {
   NativeBaseProvider,
   Text,
@@ -8,18 +7,13 @@ import {
   Row,
   Button,
   Image,
-  Heading,
-  VStack,
   FormControl,
   Input,
-  Link,
-  Icon,
-  IconButton,
-  HStack,
-  Divider,
 } from 'native-base';
+import style from '../styles/Connexion';
 
 function Connexion({navigation}) {
+  const styles = style();
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
@@ -86,24 +80,5 @@ function Connexion({navigation}) {
     </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  bienvenu: {
-    textAlign: 'center',
-    letterSpacing: 0.1,
-  },
-  loginButton: {
-    width: 220,
-    backgroundColor: '#FFF',
-  },
-  input:{
-    width:330,
-  },
-  image:{
-    width: 230,
-    height: 70,
-    marginTop: 15,
-  },
-});
 
 export default Connexion;

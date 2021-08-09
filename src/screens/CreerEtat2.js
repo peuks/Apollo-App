@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
@@ -13,14 +13,19 @@ import {
   FormControl,
   Divider,
   Select,
-  InfoIcon,
   CheckIcon,
-  Switch,
-  ArrowUpIcon,
-  SunIcon,
 } from 'native-base';
+import style from '../styles/CreerEtat2';
 
 function CreerEtat2({navigation}) {
+  const styles = style();
+  const [modaliteChauffage, setModaliteChauffage] = useState();
+  const [modaliteEau, setModaliteEau] = useState();
+  const [chaudiere, setChaudiere] = useState();
+  const [etatInterphone, setEtatInterphone] = useState();
+  const [etatBoiteLettre, setEtatBoiteLettre] = useState();
+  const [etatDetecteurFumee, setEtatDetecteurFumee] = useState();
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -55,7 +60,7 @@ function CreerEtat2({navigation}) {
           </Row>
           <Row space={2}>
             <Text color="#FFF" fontSize={14}>
-              Parties concernées
+              Informations générales
             </Text>
           </Row>
           <Row space={2}>
@@ -68,9 +73,14 @@ function CreerEtat2({navigation}) {
 
       <ScrollView>
         <Column mt={4} mx={4} space={5}>
-          <Text style={styles.textTown} fontSize={20} my={2}>
-            Électricité
-          </Text>
+          <Row justifyContent="space-between" my={2}>
+            <Text style={styles.textTown} fontSize={20}>
+              Électricité
+            </Text>
+            <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
+              Supprimer
+            </Text>
+          </Row>
           <Column mx={2} space={4}>
             <FormControl>
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
@@ -91,10 +101,14 @@ function CreerEtat2({navigation}) {
               <Input type="email" size="md" style={styles.input} />
             </FormControl>
           </Column>
-
-          <Text style={styles.textTown} fontSize={20} my={2}>
-            Gaz
-          </Text>
+          <Row justifyContent="space-between" my={2}>
+            <Text style={styles.textTown} fontSize={20}>
+              Gaz
+            </Text>
+            <Text style={{fontWeight: 'bold', color: 'red'}} fontSize={16}>
+              Supprimer
+            </Text>
+          </Row>
           <Column mx={2} space={4}>
             <FormControl>
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
@@ -134,48 +148,69 @@ function CreerEtat2({navigation}) {
           <Column mx={2} space={4}>
             <FormControl>
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-                Modalité de chauffage de l’appartement*
+                Modalité de chauffage de l’appartement ?*
               </FormControl.Label>
-              <Select
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={modaliteChauffage}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setModaliteChauffage(itemValue)
+                  }>
+                  <Picker.Item label="Collectif" value="collectif" />
+                  <Picker.Item label="Individuel" value="individuel" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-                Modalité de chauffage de l’eau*
+                Modalité de production d’eau chaude ?*
               </FormControl.Label>
-              <Select
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={modaliteEau}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setModaliteEau(itemValue)
+                  }>
+                  <Picker.Item label="Collectif" value="collectif" />
+                  <Picker.Item label="Individuel" value="individuel" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
                 Chaudière*
               </FormControl.Label>
-              <Select
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="oui" value="o" />
-                <Select.Item label="non" value="n" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={chaudiere}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setChaudiere(itemValue)
+                  }>
+                  <Picker.Item label="Oui" value="oui" />
+                  <Picker.Item label="Non" value="non" />
+                </Picker>
+              </View>
             </FormControl>
           </Column>
 
@@ -187,17 +222,26 @@ function CreerEtat2({navigation}) {
               Interphone*
             </Text>
             <FormControl>
-              <Select
-                placeholder="Etat"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatInterphone}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatInterphone(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -213,17 +257,26 @@ function CreerEtat2({navigation}) {
               Boîte aux lettres*
             </Text>
             <FormControl>
-              <Select
-                placeholder="Etat"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatBoiteLettre}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatBoiteLettre(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -239,17 +292,26 @@ function CreerEtat2({navigation}) {
               Détecteur de fumée*
             </Text>
             <FormControl>
-              <Select
-                placeholder="Etat"
-                _selectedItem={{
-                  bg: 'teal.600',
-                  endIcon: <CheckIcon size={10} />,
-                }}
-                mt={1}
-                style={styles.input}>
-                <Select.Item label="Male" value="m" />
-                <Select.Item label="Female" value="f" />
-              </Select>
+              <View
+                mt={2}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 6,
+                  height: 55,
+                }}>
+                <Picker
+                  selectedValue={etatDetecteurFumee}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setEtatDetecteurFumee(itemValue)
+                  }>
+                  <Picker.Item label="Neuf" value="neuf" />
+                  <Picker.Item label="Bon état" value="bon etat" />
+                  <Picker.Item label="État d'usage" value="etat d'usage" />
+                  <Picker.Item label="Mauvais état" value="mauvais etat" />
+                  <Picker.Item label="Hors service" value="hors service" />
+                </Picker>
+              </View>
             </FormControl>
             <FormControl>
               <Input
@@ -289,55 +351,5 @@ function CreerEtat2({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  suivantButton: {
-    width: 200,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  ajouterButton: {
-    width: 340,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default CreerEtat2;

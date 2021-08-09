@@ -1,27 +1,25 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Picker} from 'react-native';
 import {
   Text,
   Box,
   Column,
   Row,
   Button,
-  Icon,
-  Image,
-  SearchIcon,
-  SunIcon,
   ArrowUpIcon,
   ArrowBackIcon,
   Input,
   Switch,
   View,
   ScrollView,
-  CircleIcon,
   FormControl,
-  Select,
 } from 'native-base';
+import style from '../styles/ComptePro';
 
 function Compte({navigation}) {
+  const styles = style();
+  const [genre, setgenre] = useState();
+
   return (
     <Box flex={1} bg="#FAFAFA">
       <Row
@@ -133,7 +131,21 @@ function Compte({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Genre*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={genre}
+                onValueChange={(itemValue, itemIndex) => setgenre(itemValue)}>
+                <Picker.Item label="Masculin" value="m" />
+                <Picker.Item label="Féminin" value="f" />
+              </Picker>
+            </View>
           </FormControl>
           <Text style={styles.textTown} fontSize={20} my={5}>
             Profil public
@@ -171,13 +183,19 @@ function Compte({navigation}) {
             <Text bold>Afficher le nombre de logements*</Text>
             <Row space={1}>
               <Text>Oui</Text>
-              <Switch size="lg"  colorScheme="emerald" mt={-0.5} offTrackColor="#0B3D91" onThumbColor="#fff"/>
+              <Switch
+                size="lg"
+                colorScheme="emerald"
+                mt={-0.5}
+                offTrackColor="#cddefa"
+                onTrackColor="#cddefa"
+                onThumbColor="#0B3D91"
+                offThumbColor="#0B3D91"
+              />
               <Text ml={-1}>Non</Text>
             </Row>
             
           </Column>
-          
-          
           <Column
             space={3}
             pt={6}
@@ -210,53 +228,5 @@ function Compte({navigation}) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  cards: {
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  input: {
-    borderColor:"#000",
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  modifierButton: {
-    width: 280,
-    backgroundColor: '#0B3D91',
-  },
-  supprimerButton: {
-    width: 280,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-  },
-});
 
 export default Compte;

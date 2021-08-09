@@ -1,39 +1,47 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
 import Carousel from 'pinar';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
   Row,
   Button,
-  Icon,
   Image,
-  SearchIcon,
-  SunIcon,
-  ArrowUpIcon,
-  Stack,
   Divider,
-  IconButton,
   Center,
-  StatusBar,
   ArrowBackIcon,
   ScrollView,
   Modal,
+  Pressable,
   CircleIcon,
   FormControl,
   Input,
   Checkbox,
 } from 'native-base';
+import SurfaceLgIcon from '../assets/svg/SurfaceLgIcon';
+import MeubleLgIcon from '../assets/svg/MeubleLgIcon';
+import ChambreLgIcon from '../assets/svg/ChambreLgIcon';
+import FavIcon from '../assets/svg/FavIcon';
+import ShareIcon from '../assets/svg/ShareIcon';
+import LaverieIcon from '../assets/svg/LaverieIcon';
+import VeloIcon from '../assets/svg/VeloIcon';
+import AscenseurIcon from '../assets/svg/AscenseurIcon';
+import GarageIcon from '../assets/svg/GarageIcon';
+import AgenceIcon from '../assets/svg/AgenceIcon';
+import CuisineEquipeeIcon from '../assets/svg/CuisineEquipeeIcon';
+import SalledebainIcon from '../assets/svg/SalledebainIcon';
+import ApollomessageIcon from '../assets/svg/ApollomessageIcon';
+import style from '../styles/Propriete';
 
 function Propriete({navigation}) {
+  const styles = style();
+
   const [showModalContact, setShowModalContact] = useState(false);
   const [showModalcandidat1, setShowModalcandidat1] = useState(false);
   const [showModalcandidat2, setShowModalcandidat2] = useState(false);
   const [showModalcandidat3, setShowModalcandidat3] = useState(false);
   const [showModalcandidat4, setShowModalcandidat4] = useState(false);
-
+  
   return (
     <Box flex={1} bg="#FAFAFA">
       {/*MODAL CONTACTER*/}
@@ -99,7 +107,8 @@ function Propriete({navigation}) {
                   color: '#FFF',
                 }}
                 onPress={() => navigation.navigate('Propriete')}
-                mt={6}>
+                mt={6}
+                endIcon={<ApollomessageIcon />}>
                 Messagerie Apollo
               </Button>
             </Center>
@@ -457,13 +466,12 @@ function Propriete({navigation}) {
           />
         </Row>
         <Row space={6}>
-          <ArrowUpIcon size="md" color="#3F3D56" />
-          <Image
-            style={{width: 26, height: 26}}
-            source={require('../assets/icons/fav.png')}
-            alt="MySpace"
-            mt={1}
-          />
+          <Pressable>
+            <ShareIcon  />
+          </Pressable>
+          <Pressable>
+            <FavIcon  />
+          </Pressable>
         </Row>
       </Row>
       <ScrollView>
@@ -559,27 +567,35 @@ function Propriete({navigation}) {
               </Button>
             </Row>
 
-            <Row mt={6} alignItems="center" justifyContent="space-evenly">
-              <Column alignItems="center">
-                <SunIcon />
+            <Row mt={8} alignItems="center" justifyContent="space-evenly">
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <SurfaceLgIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   120 m2
                 </Text>
               </Column>
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <MeubleLgIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   Meublé
                 </Text>
               </Column>
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <ChambreLgIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   3 chambres
                 </Text>
               </Column>
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <LaverieIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   4 pièces
                 </Text>
@@ -587,26 +603,34 @@ function Propriete({navigation}) {
             </Row>
 
             <Row mt={6} alignItems="center" justifyContent="space-evenly">
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <SalledebainIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   1 salle de bain
                 </Text>
               </Column>
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable alignItems="center" justifyContent="center" mt={4}>
+                  <CuisineEquipeeIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   1 cuisine{'\n'} équipée
                 </Text>
               </Column>
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <AgenceIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   Agence
                 </Text>
               </Column>
-              <Column alignItems="center">
-                <SunIcon />
+              <Column alignItems="center" justifyContent="center">
+                <Pressable>
+                  <GarageIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   Garage
                 </Text>
@@ -622,19 +646,25 @@ function Propriete({navigation}) {
               alignSelf="flex-start"
               justifyContent="space-evenly">
               <Column alignItems="center">
-                <SunIcon />
+                <Pressable>
+                  <LaverieIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   Laverie
                 </Text>
               </Column>
               <Column alignItems="center">
-                <SunIcon />
+                <Pressable>
+                  <AscenseurIcon  width={60} height={60}/>
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   Ascenseur
                 </Text>
               </Column>
               <Column alignItems="center">
-                <SunIcon />
+                <Pressable>
+                  <VeloIcon width={60} height={60} />
+                </Pressable>
                 <Text fontSize="xs" style={styles.IconsText} noOfLines={2}>
                   Local vélo
                 </Text>
@@ -720,16 +750,6 @@ function Propriete({navigation}) {
           </Column>
         </Column>
         <Box style={styles.mapsArea}>
-          {/*  <Image
-              source={require('../assets/images/Map.jpg')}
-              alt="image base"
-              width={370}
-              height={190}
-              style={{
-                marginTop: 10,
-                borderRadius: 8,
-              }}
-            />*/}
           <Text style={styles.textAlign}>MAPS</Text>
         </Box>
       </ScrollView>
@@ -737,120 +757,6 @@ function Propriete({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  input: {
-    color: '#000',
-    borderColor: '#000',
-    height: 40,
-  },
-  modalHeader: {
-    fontSize: 20,
-    textAlign: 'left',
-    marginBottom: 20,
-  },
-  modalText: {
-    fontSize: 14,
-  },
-  cards: {
-    shadowOffset: {width: 0, height: 6},
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    borderRadius: 1,
-    elevation: 2,
-  },
-  mapsArea: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 300,
-    backgroundColor: '#0B3D91',
-    marginTop: 50,
-    opacity: 0.89,
-  },
-  searchBar: {
-    borderColor: '#000',
-  },
-  cartText: {
-    textAlign: 'center',
-    color: '#3F3D56',
-    fontWeight: 'bold',
-  },
-  candidaterButton: {
-    width: 160,
-    backgroundColor: '#0B3D91',
-  },
-  contactButton: {
-    width: 160,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  textTown: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  textAdress: {
-    color: '#3F3D56',
-  },
-  textPrice: {
-    color: '#3F3D56',
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  IconsText: {
-    color: '#3F3D56',
-    textAlign: 'center',
-    width: 80,
-  },
-  descriptionTitle: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    color: '#3F3D56',
-  },
-  descriptionText: {
-    color: '#3F3D56',
-    textAlign: 'justify',
-    alignItems: 'flex-start',
-    width: 360,
-  },
-  container: {
-    flexDirection: 'row',
-  },
 
-  //Candidater1 modal
-  candidatermodalHeader: {
-    fontSize: 20,
-    marginBottom: 5,
-    color: '#225FC7',
-  },
-  candidatermodalTitle: {
-    fontSize: 15,
-    textAlign: 'left',
-    marginBottom: 10,
-  },
-  candidatermodalText: {
-    fontSize: 12,
-    textAlign: 'justify',
-  },
-  inscrireButton: {
-    width: 140,
-    backgroundColor: '#0B3D91',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  fermerButton: {
-    width: 140,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
-  },
-  //Candidater2 modal
-
-  //Candidater3 modal
-
-  //Candidater4 modal : candidature instantanée
-});
 
 export default Propriete;
