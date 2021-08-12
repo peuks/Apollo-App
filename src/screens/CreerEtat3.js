@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {
   Text,
   Box,

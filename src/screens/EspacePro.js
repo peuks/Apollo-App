@@ -7,7 +7,6 @@ import {
   Button,
   Icon,
   Image,
-  SunIcon,
   ScrollView,
   Pressable,
   Switch,

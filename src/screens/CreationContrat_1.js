@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//This import for date format
+import moment from 'moment';
 import {
   Text,
   Box,
@@ -11,11 +14,29 @@ import {
   ScrollView,
   FormControl,
   Divider,
+  Pressable,
 } from 'native-base';
+import CalendrierIcon from '../assets/svg/CalendrierIcon';
 import style from '../styles/CreationContrat_1';
 
 function CreationContrat_1({navigation}) {
   const styles = style();
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    //Format the date
+    //const fCurrentDate = moment(new Date(currentDate)).format('DD-MM-YYYY');
+    setShow(Platform.OS === 'ios');
+    console.log('date :' + currentDate);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -77,13 +98,13 @@ function CreationContrat_1({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Nom*
             </FormControl.Label>
-            <Input size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Prenom*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
@@ -95,25 +116,49 @@ function CreationContrat_1({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Téléphone*
             </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
+            <Input type="tel" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Date de naissance*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Pressable
+              onPress={showDatepicker}
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}
+              justifyContent="center">
+              <Row space={5} px={2}>
+                <CalendrierIcon />
+                {show && (
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="mode"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+                )}
+                <Text mt={1}>{""+ moment(date).format('DD-MM-YYYY')}</Text>
+              </Row>
+            </Pressable>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Lieu de naissance*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Adresse complète*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
 
           <Text

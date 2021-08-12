@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//This import for date format
+import moment from 'moment';
+import {Picker} from '@react-native-picker/picker'
 import {
   Text,
   Box,
   Column,
   Row,
+  Icon,
   Button,
   ArrowUpIcon,
+  Pressable,
   ArrowBackIcon,
   Input,
   Switch,
@@ -14,11 +19,28 @@ import {
   ScrollView,
   FormControl,
 } from 'native-base';
+import AddpicIcon from '../assets/svg/AddpicIcon';
+import CalendrierIcon from '../assets/svg/CalendrierIcon';
 import style from '../styles/ComptePro';
 
 function Compte({navigation}) {
   const styles = style();
   const [genre, setgenre] = useState();
+   const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    //Format the date
+    //const fCurrentDate = moment(new Date(currentDate)).format('DD-MM-YYYY');
+    setShow(Platform.OS === 'ios');
+    console.log('date :' + currentDate);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
 
   return (
     <Box flex={1} bg="#FAFAFA">
@@ -59,75 +81,99 @@ function Compte({navigation}) {
             <Input size="md" style={styles.input} />
           </FormControl>
 
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Prenom*
             </FormControl.Label>
             <Input type="password" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Email*
             </FormControl.Label>
             <Input type="password" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Téléphone*
             </FormControl.Label>
             <Input type="password" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Adresse*
             </FormControl.Label>
             <Input type="password" size="md" style={styles.input} />
           </FormControl>
           <Row alignItems="center" justifyContent="space-between">
-            <FormControl  width="40">
+            <FormControl width="40">
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
                 Code Postal*
               </FormControl.Label>
               <Input type="password" size="md" style={styles.input} />
             </FormControl>
-            <FormControl  width="40">
+            <FormControl width="40">
               <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
                 Ville*
               </FormControl.Label>
               <Input type="password" size="md" style={styles.input} />
             </FormControl>
           </Row>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Pays*
             </FormControl.Label>
             <Input type="password" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Date de naissance*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Pressable
+              onPress={showDatepicker}
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}
+              justifyContent="center">
+              <Row space={5} px={2}>
+                <CalendrierIcon />
+                {show && (
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="mode"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+                )}
+                <Text mt={1}>{'' + moment(date).format('DD-MM-YYYY')}</Text>
+              </Row>
+            </Pressable>
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Ville de naissance*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Pays de naissance*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               RIB*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Genre*
             </FormControl.Label>
@@ -150,7 +196,7 @@ function Compte({navigation}) {
           <Text style={styles.textTown} fontSize={20} my={5}>
             Profil public
           </Text>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Photo de profil*
             </FormControl.Label>
@@ -159,21 +205,10 @@ function Compte({navigation}) {
               size="md"
               style={styles.input}
               placeholder="Cliquez ici pour ajouter une photo"
-              InputLeftElement={
-                <ArrowUpIcon
-                  size="sm"
-                  m={2}
-                  _light={{
-                    color: 'black',
-                  }}
-                  _dark={{
-                    color: 'gray.300',
-                  }}
-                />
-              }
+              InputLeftElement={<AddpicIcon />}
             />
           </FormControl>
-          <FormControl >
+          <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Description*
             </FormControl.Label>
@@ -194,7 +229,6 @@ function Compte({navigation}) {
               />
               <Text ml={-1}>Non</Text>
             </Row>
-            
           </Column>
           <Column
             space={3}

@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//This import for date format
+import moment from 'moment';
 import {
   Text,
   Box,
@@ -22,11 +25,28 @@ import MaisonIcon from '../assets/svg/MaisonIcon';
 import ResidenceEtudiantIcon from '../assets/svg/ResidenceEtudiantIcon';
 import PlusIcon from '../assets/svg/PlusIcon';
 import MinusIcon from '../assets/svg/MinusIcon';
+import CalendrierIcon from '../assets/svg/CalendrierIcon';
 import style from '../styles/CreerEtat';
 
 function CreerEtat({navigation}) {
   const styles = style();
   const [piece, setPiece] = useState();
+
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    //Format the date
+    //const fCurrentDate = moment(new Date(currentDate)).format('DD-MM-YYYY');
+    setShow(Platform.OS === 'ios');
+    console.log('date :' + currentDate);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
 
   return (
     <Box flex={1} bg="#FFF">
@@ -136,13 +156,37 @@ function CreerEtat({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Date de la réalisation de l’état des lieux*
             </FormControl.Label>
-            <Input type="date" size="md" style={styles.input} />
+            <Pressable
+              onPress={showDatepicker}
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}
+              justifyContent="center">
+              <Row space={5} px={2}>
+                <CalendrierIcon />
+                {show && (
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="mode"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+                )}
+                <Text mt={1}>{""+ moment(date).format('DD-MM-YYYY')}</Text>
+              </Row>
+            </Pressable>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Nom de l’ancien occupant*
             </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           
 

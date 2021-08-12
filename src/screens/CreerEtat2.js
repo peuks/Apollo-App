@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {
   Text,
   Box,
@@ -246,7 +246,7 @@ function CreerEtat2({navigation}) {
             <FormControl>
               <Input
                 placeholder="Commentaire"
-                type="number"
+                type="text"
                 size="md"
                 style={styles.input}
               />
@@ -281,7 +281,7 @@ function CreerEtat2({navigation}) {
             <FormControl>
               <Input
                 placeholder="Commentaire"
-                type="number"
+                type="text"
                 size="md"
                 style={styles.input}
               />
@@ -316,7 +316,7 @@ function CreerEtat2({navigation}) {
             <FormControl>
               <Input
                 placeholder="Commentaire"
-                type="number"
+                type="text"
                 size="md"
                 style={styles.input}
               />

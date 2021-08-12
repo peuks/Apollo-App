@@ -6,7 +6,6 @@ import {
   Row,
   Button,
   Image,
-  SunIcon,
   View,
   ScrollView,
   Pressable,

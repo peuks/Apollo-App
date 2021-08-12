@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import {Picker} from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//This import for date format
+import moment from 'moment';
 import {
   Text,
   Box,
@@ -6,6 +10,7 @@ import {
   Row,
   Button,
   Icon,
+  Pressable,
   ArrowBackIcon,
   Input,
   View,
@@ -13,11 +18,30 @@ import {
   FormControl,
   Divider,
 } from 'native-base';
+import CalendrierIcon from '../assets/svg/CalendrierIcon';
 import AddpicIcon from '../assets/svg/AddpicIcon';
 import style from '../styles/CreerDossierLoc';
 
 function CreerDossierLoc({navigation}) {
   const styles = style();
+  const [typeContrat, setTypeContrat] = useState();
+  const [profession, setProfession] = useState();
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    //Format the date
+    //const fCurrentDate = moment(new Date(currentDate)).format('DD-MM-YYYY');
+    setShow(Platform.OS === 'ios');
+    console.log('date :' + currentDate);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -101,25 +125,96 @@ function CreerDossierLoc({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Date de naissance*
             </FormControl.Label>
-            <Input size="md" style={styles.input} />
+            <Pressable
+              onPress={showDatepicker}
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}
+              justifyContent="center">
+              <Row space={5} px={2}>
+                <CalendrierIcon />
+                {show && (
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="mode"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+                )}
+                <Text mt={1}>{""+ moment(date).format('DD-MM-YYYY')}</Text>
+              </Row>
+            </Pressable>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Lieu de naissance*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Profession*
             </FormControl.Label>
-            <Input type="email" size="md" style={styles.input} />
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={profession}
+                onValueChange={(itemValue, itemIndex) =>
+                  setProfession(itemValue)
+                }>
+                <Picker.Item label="Étudiant" value="etudiant" />
+                <Picker.Item label="Salarié" value="salarie" />
+                <Picker.Item label="Artisan" value="artisan" />
+                <Picker.Item label="Indépendant" value="independant" />
+                <Picker.Item label="Fonctionnaire" value="fonctionnaire" />
+                <Picker.Item
+                  label="Profession libérale"
+                  value="profession liberale"
+                />
+                <Picker.Item
+                  label="Chef d'entreprise"
+                  value="chef entreprise"
+                />
+                <Picker.Item
+                  label="Retraité ou sans activité"
+                  value="retraite"
+                />
+              </Picker>
+            </View>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Type de contrat*
             </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
+            <View
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}>
+              <Picker
+                selectedValue={typeContrat}
+                onValueChange={(itemValue, itemIndex) =>
+                  setTypeContrat(itemValue)
+                }>
+                <Picker.Item label="Meublé" value="meuble" />
+                <Picker.Item label="Non meublé" value="non meuble" />
+              </Picker>
+            </View>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>

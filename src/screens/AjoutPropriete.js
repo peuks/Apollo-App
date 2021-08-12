@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {
   Text,
   Box,
@@ -13,17 +13,33 @@ import {
   ScrollView,
   FormControl,
   Divider,
-  Select,
-  CheckIcon,
 } from 'native-base';
 import AppartementIcon from '../assets/svg/AppartementIcon';
 import MaisonIcon from '../assets/svg/MaisonIcon';
 import ResidenceEtudiantIcon from '../assets/svg/ResidenceEtudiantIcon';
 import style from '../styles/AjoutPropriete';
+import {Formik} from 'formik';
+
+const validate = values => {
+  const errors = {};
+
+  if (!values.firstName) {
+    errors.firstName = 'FirstName Required';
+  }
+  if (!values.lastName) {
+    errors.lastName = 'lastName Required';
+  }
+
+  return errors;
+};
 
 function AjoutPropriete({navigation}) {
   const styles = style();
-  const [natureLocation,setNatureLocation] = useState();
+  const onSubmit = (data) => {
+    console.log('submiting with ', data);
+  };
+  const [natureLocation, setNatureLocation] = useState();
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -90,6 +106,7 @@ function AjoutPropriete({navigation}) {
                 </Text>
               </Column>
             </Pressable>
+
             <Pressable>
               <Column alignItems="center">
                 <MaisonIcon width={70} height={70} />
@@ -112,12 +129,15 @@ function AjoutPropriete({navigation}) {
               Adresse du bien*
             </FormControl.Label>
             <Input type="text" size="md" style={styles.input} />
+            <FormControl.ErrorMessage>
+              Ce champ est requis
+            </FormControl.ErrorMessage>
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Ville*
             </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>

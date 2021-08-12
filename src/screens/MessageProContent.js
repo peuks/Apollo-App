@@ -7,18 +7,12 @@ import {
   Button,
   Icon,
   Image,
-  SearchIcon,
-  SunIcon,
-  ArrowUpIcon,
   ArrowBackIcon,
   Input,
-  Stack,
   View,
   ScrollView,
   Pressable,
-  Modal,
   Center,
-  CircleIcon,
   FormControl,
 } from 'native-base';
 import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';

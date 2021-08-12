@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {
   Text,
   Box,
@@ -78,13 +77,13 @@ function CreationContrat_2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Nom*
             </FormControl.Label>
-            <Input size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Prenom*
             </FormControl.Label>
-            <Input type="password" size="md" style={styles.input} />
+            <Input type="text" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
@@ -96,7 +95,7 @@ function CreationContrat_2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Téléphone*
             </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
+            <Input type="tel" size="md" style={styles.input} />
           </FormControl>
 
           <Button

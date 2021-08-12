@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//This import for date format
+import moment from 'moment';
 import {
   Text,
   Box,
@@ -17,6 +20,7 @@ import {
 } from 'native-base';
 import PlusIcon from '../assets/svg/PlusIcon';
 import MinusIcon from '../assets/svg/MinusIcon';
+import CalendrierIcon from '../assets/svg/CalendrierIcon';
 import style from '../styles/AjoutPropriete2';
 
 function AjoutPropriete2({navigation}) {
@@ -24,6 +28,21 @@ function AjoutPropriete2({navigation}) {
   const [piece, setPiece] = useState();
 
   const [etage, setEtage] = useState();
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    //Format the date
+    //const fCurrentDate = moment(new Date(currentDate)).format('DD-MM-YYYY');
+    setShow(Platform.OS === 'ios');
+    console.log('date :' + currentDate);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -205,13 +224,37 @@ function AjoutPropriete2({navigation}) {
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Superficie*
             </FormControl.Label>
-            <Input type="text" size="md" style={styles.input} />
+            <Input type="number" size="md" style={styles.input} />
           </FormControl>
           <FormControl>
             <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
               Date de disponibilité*
             </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
+            <Pressable
+              onPress={showDatepicker}
+              mt={2}
+              style={{
+                borderWidth: 1,
+                borderColor: '#000',
+                borderRadius: 6,
+                height: 55,
+              }}
+              justifyContent="center">
+              <Row space={5} px={2}>
+                <CalendrierIcon />
+                {show && (
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="mode"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+                )}
+                <Text mt={1}>{""+ moment(date).format('DD-MM-YYYY')}</Text>
+              </Row>
+            </Pressable>
           </FormControl>
           <Row space={1}>
             <Checkbox
