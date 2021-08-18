@@ -36,11 +36,13 @@ import CreerEtatSortie from './CreerEtatSortie';
 import CreerEtatSortie2 from './CreerEtatSortie2';
 import DevisCheckVisit from './DevisCheckVisit';
 import DevisCheckVisit2 from './DevisCheckVisit2';
+import ListeCandidaturePro from './ListeCandidaturePro';
 import MessageIcon from '../assets/svg/MessageIcon';
 import ProfileIcon from '../assets/svg/ProfileIcon';
 import AddIcon from '../assets/svg/AddIcon';
 import ContractIcon from '../assets/svg/ContractIcon';
 import InventoryIcon from '../assets/svg/InventoryIcon';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -220,6 +222,11 @@ function MonEspace() {
         name="Compte"
         component={ComptePro}
         options={{title: 'Compte', headerShown: false}}
+      />
+      <Stack.Screen
+        name="ListeCandidaturePro"
+        component={ListeCandidaturePro}
+        options={{title: 'ListeCandidaturePro', headerShown: false}}
       />
       <Stack.Screen
         name="ProprietePro"

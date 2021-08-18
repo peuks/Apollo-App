@@ -30,13 +30,15 @@ const validate = values => {
   if (!values.superficie) {
     errors.superficie = 'Ce champ est requis';
   }
+  if (!values.dateD) {
+    errors.dateD = 'Ce champ est requis';
+  }
 
   return errors;
 };
 
 function AjoutPropriete2({navigation}) {
   const styles = style();
-  const [piece, setPiece] = useState(1);
   const [chambre, setChambre] = useState(0);
   const [salleDeBain, setSalleDeBain] = useState(0);
   const [salon, setSalon] = useState(0);
@@ -113,11 +115,11 @@ function AjoutPropriete2({navigation}) {
       <ScrollView>
         <Formik
           initialValues={{
-            piece: '',
+            piece: 'studio',
             chambre: '0',
-            salleDeBain:'',
+            salleDeBain:'0',
             salon: '0',
-            etage: '',
+            etage: 'rdc',
             superficie: '',
             dateDisponibilite: '',
           }}
@@ -129,14 +131,14 @@ function AjoutPropriete2({navigation}) {
                 Formulaire appartement
               </Text>
 
-              <FormControl isRequired>
+              <FormControl isRequired isInvalid={'piece' in errors}>
                 <Row
                   space={8}
                   alignItems="center"
                   justifyContent="space-between">
-                  <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-                    Pièces*
-                  </Text>
+                  <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                    Pièces
+                  </FormControl.Label>
                   <View
                     w={40}
                     style={{
@@ -146,10 +148,8 @@ function AjoutPropriete2({navigation}) {
                       height: 55,
                     }}>
                     <Picker
-                      selectedValue={piece}
-                      onValueChange={(itemValue, itemIndex) =>
-                        setPiece(itemValue)
-                      }>
+                      selectedValue={values.piece}
+                      onValueChange={handleChange('piece')}>
                       <Picker.Item label="Studio" value="studio" />
                       <Picker.Item label="1" value="1" />
                       <Picker.Item label="2" value="2" />
@@ -250,14 +250,14 @@ function AjoutPropriete2({navigation}) {
                   </Row>
                 </Row>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired isInvalid={'etage' in errors}>
                 <Row
                   space={8}
                   alignItems="center"
                   justifyContent="space-between">
-                  <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-                    Étage du bien*
-                  </Text>
+                  <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                    Etage
+                  </FormControl.Label>
                   <View
                     w={40}
                     style={{
@@ -267,10 +267,8 @@ function AjoutPropriete2({navigation}) {
                       height: 55,
                     }}>
                     <Picker
-                      selectedValue={etage}
-                      onValueChange={(itemValue, itemIndex) =>
-                        setEtage(itemValue)
-                      }>
+                      selectedValue={values.etage}
+                      onValueChange={handleChange('etage')}>
                       <Picker.Item label="RDC" value="rdc" />
                       <Picker.Item label="1" value="1" />
                       <Picker.Item label="2" value="2" />
@@ -304,7 +302,7 @@ function AjoutPropriete2({navigation}) {
                   {errors.superficie}
                 </FormControl.ErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired isInvalid={'dateDisponibilite' in errors}>
                 <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
                   Date de disponibilité*
                 </FormControl.Label>
@@ -355,7 +353,8 @@ function AjoutPropriete2({navigation}) {
                 mt={6}
                 alignSelf="center"
                 //onPress={() => navigation.navigate('AjoutPropriete3')}
-                onPress={onSubmit}>
+                onPress={handleSubmit}
+                >
                 Suivant
               </Button>
             </Column>

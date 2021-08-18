@@ -133,7 +133,7 @@ function AjoutPropriete({navigation}) {
               typeBien: '',
               adresseBien: '',
               ville: '',
-              natureLocation: '',
+              natureLocation: 'meuble',
             }}
             onSubmit={onSubmit}
             validate={validate}>
@@ -184,10 +184,7 @@ function AjoutPropriete({navigation}) {
                     }}>
                     <Picker
                       selectedValue={values.natureLocation}
-                      onValueChange={(itemValue, itemIndex) => {
-                        setFieldValue('natureLocation', itemValue);
-                        setNatureLocation(itemValue);
-                      }}>
+                      onValueChange={handleChange('natureLocation')}>
                       <Picker.Item label="Meublée" value="meublee" />
                       <Picker.Item label="Vide" value="vide" />
                     </Picker>
@@ -203,7 +200,9 @@ function AjoutPropriete({navigation}) {
                   mb={10}
                   mt={6}
                   alignSelf="center"
-                  onPress={() => { navigation.navigate('AjoutPropriete2'); handleSubmit}}>
+                  onPress={() => { navigation.navigate('AjoutPropriete2'); handleSubmit}}
+                  //onPress={handleSubmit}
+                  >
                   Suivant
                 </Button>
               </Column>

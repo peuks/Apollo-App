@@ -85,7 +85,9 @@ function EspacePro({navigation}) {
               alignItems="center"
               justifyContent="center"
               style={styles.cardStatistics}
-              shadow={6}>
+              shadow={6}
+              onPress={() => navigation.navigate('ListeCandidaturePro')}
+              >
               <Column alignItems="center" justifyContent="center">
                 <Text fontSize="4xl" style={styles.textTown}>
                   8
