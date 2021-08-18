@@ -21,6 +21,7 @@ import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
 import ChambreSmIcon from '../assets/svg/ChambreSmIcon';
 import FiltreIcon from '../assets/svg/FiltreIcon';
 import FavIcon from '../assets/svg/FavIcon';
+import FavredIcon from '../assets/svg/FavredIcon';
 import LocationIcon from '../assets/svg/LocationIcon';
 import style from '../styles/Search';
 
@@ -163,18 +164,9 @@ function Search({navigation}) {
                 roundedTop="lg"
               />
             </Carousel>
-            <Text
-              bold
-              position="absolute"
-              color="white"
-              right={0}
-              top={0}
-              m={[8, 4, 30]}>
-              FAV
-            </Text>
-            {/*<Box right={0} top={0} m={[8, 4, 30]}>
-              <FavIcon/>
-            </Box>*/}
+            <Pressable position="absolute" right={0} top={0} mr={5} mt={5} >
+              <FavIcon width={33} height={33}/>
+            </Pressable>
             <Row space={5} pl={1} pr={1} mt={5} mb={5}>
               <Column>
                 <Text fontSize="sm" style={styles.textTown}>
@@ -267,15 +259,9 @@ function Search({navigation}) {
                 roundedTop="lg"
               />
             </Carousel>
-            <Text
-              bold
-              position="absolute"
-              color="white"
-              right={0}
-              top={0}
-              m={[8, 4, 30]}>
-              FAV
-            </Text>
+            <Pressable position="absolute" right={0} top={0} mr={5} mt={5} >
+              <FavIcon width={33} height={33}/>
+            </Pressable>
             <Row space={5} pl={1} pr={1} mt={5} mb={5}>
               <Column>
                 <Text fontSize="sm" style={styles.textTown}>
@@ -354,15 +340,9 @@ function Search({navigation}) {
               roundedTop="lg"
               onPress={() => navigation.navigate('Propriete')}
             />
-            <Text
-              bold
-              position="absolute"
-              color="white"
-              right={0}
-              top={0}
-              m={[8, 4, 30]}>
-              FAV
-            </Text>
+            <Pressable position="absolute" right={0} top={0} mr={5} mt={5} >
+              <FavredIcon width={25} height={25} />
+            </Pressable>
             <Row space={5} pl={1} pr={1} mt={5} mb={5}>
               <Column>
                 <Text fontSize="sm" style={styles.textTown}>
