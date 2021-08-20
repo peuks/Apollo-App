@@ -146,6 +146,7 @@ function DevisCheckVisit2({navigation}) {
                   {errors.nom}
                 </FormControl.ErrorMessage>
               </FormControl>
+              
               <FormControl isRequired isInvalid={'prenom' in errors}>
                 <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
                   Prenom
