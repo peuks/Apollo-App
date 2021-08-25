@@ -43,9 +43,31 @@ const styles = () => {
       fontWeight: 'bold',
       marginTop: 10,
     },
+    littlePressable: {
+      width: 110,
+      borderWidth: 1,
+      borderColor: '#fff',
+      elevation: 2,
+      backgroundColor: '#fff',
+      borderRadius: 4,
+    },
+    activelittlePressable:{
+      width: 110,
+      borderWidth: 1,
+      borderColor: '#0B3D91',
+      elevation: 2,
+      backgroundColor: '#0B3D91',
+      borderRadius: 4,
+    },
     IconsText: {
-      color: '#3F3D56',
       textAlign: 'center',
+    },
+    activeText: {
+      color: '#0B3D91',
+      fontWeight: 'bold',
+    },
+    inactiveText: {
+      color: '#3F3D56',
     },
   });
 };

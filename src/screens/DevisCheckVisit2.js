@@ -66,6 +66,7 @@ const validate = values => {
 
 function DevisCheckVisit2({navigation}) {
   const styles = style();
+  const [autrePartie, setAutrepartie] = useState(null);
   const onSubmit = data => {
     console.log('submiting with ', data);
   };
@@ -146,7 +147,7 @@ function DevisCheckVisit2({navigation}) {
                   {errors.nom}
                 </FormControl.ErrorMessage>
               </FormControl>
-              
+
               <FormControl isRequired isInvalid={'prenom' in errors}>
                 <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
                   Prenom
@@ -326,6 +327,88 @@ function DevisCheckVisit2({navigation}) {
               <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
                 Autres parties du logement ?*
               </Text>
+              <Row space={8} alignItems="center" justifyContent="center">
+                <Pressable
+                  onPress={() =>
+                    setAutrepartie(prev =>
+                      prev === 'box' ? null : 'box',
+                    )
+                  }>
+                  <Column alignItems="center">
+                    <BoxIcon
+                      width={70}
+                      height={70}
+                      color={
+                        autrePartie === 'box' ? '#0B3D91' : '#3F3D56'
+                      }
+                    />
+                    <Text
+                      fontSize="sm"
+                      style={[
+                        styles.IconsText,
+                        autrePartie === 'box'
+                          ? styles.activeText
+                          : styles.inactiveText,
+                      ]}
+                      noOfLines={2}>
+                      Box
+                    </Text>
+                  </Column>
+                </Pressable>
+
+                <Pressable
+                  onPress={() =>
+                    setAutrepartie(prev =>
+                      prev === 'cave' ? null : 'cave',
+                    )
+                  }>
+                  <Column alignItems="center">
+                    <CaveIcon
+                      width={70}
+                      height={70}
+                      color={autrePartie === 'cave' ? '#0B3D91' : '#3F3D56'}
+                    />
+                    <Text
+                      fontSize="sm"
+                      style={[
+                        styles.IconsText,
+                        autrePartie === 'maison'
+                          ? styles.activeText
+                          : styles.inactiveText,
+                      ]}
+                      noOfLines={2}>
+                      Maison
+                    </Text>
+                  </Column>
+                </Pressable>
+                <Pressable
+                  onPress={() =>
+                    setAutrepartie(prev =>
+                      prev === 'residence' ? null : 'residence',
+                    )
+                  }>
+                  <Column alignItems="center">
+                    <JardinIcon
+                      width={70}
+                      height={70}
+                      color={
+                        autrePartie === 'residence' ? '#0B3D91' : '#3F3D56'
+                      }
+                    />
+                    <Text
+                      fontSize="sm"
+                      style={[
+                        styles.IconsText,
+                        autrePartie === 'residence'
+                          ? styles.activeText
+                          : styles.inactiveText,
+                      ]}
+                      noOfLines={2}>
+                      Res. étudiante
+                    </Text>
+                  </Column>
+                </Pressable>
+              </Row>
               <Row space={8} alignItems="center" justifyContent="center">
                 <Pressable>
                   <Column alignItems="center">

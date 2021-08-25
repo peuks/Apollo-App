@@ -1,5 +1,13 @@
 import React from 'react';
-import Svg, {G, Path, Circle, Rect, Filter, Defs,Polygon} from 'react-native-svg';
+import Svg, {
+  G,
+  Path,
+  Circle,
+  Rect,
+  Filter,
+  Defs,
+  Polygon,
+} from 'react-native-svg';
 
 interface AppartementProps {
   color?: string;
@@ -13,9 +21,16 @@ const AppartementIcon = ({
   height = 40,
 }: AppartementProps) => {
   return (
-<Svg width={width} height={height} viewBox="0 0 64 64">
+    <Svg width={width} height={height} viewBox="0 0 64 64">
       <G filter="url(#filter0_d)">
-        <Circle cx="32" cy="32" r="28" fill="white" stroke="#CCCCCC" stroke-width="1.2"/>
+        <Circle
+          cx="32"
+          cy="32"
+          r="28"
+          fill="#FFF"
+          stroke="#CCCCCC"
+          stroke-width="1.2"
+        />
       </G>
       <G opacity="0.8">
         <Path
@@ -195,9 +210,7 @@ const AppartementIcon = ({
           fill={color}
         />
       </G>
-      
     </Svg>
-
   );
 };
 

@@ -3,19 +3,29 @@ import {StyleSheet} from 'react-native';
 const styles = () => {
   return StyleSheet.create({
     cards: {
-      backgroundColor: '#fff',
       borderRadius: 10,
       elevation: 2,
       borderWidth: 1,
-      borderColor: '#fff',
       width: 60,
       alignItems: 'center',
     },
-    input: {},
+    activeCards:{
+      backgroundColor: '#0B3D91',
+      borderColor: '#0B3D91',
+    },
+    inactiveCards:{
+      backgroundColor: '#fff',
+      borderColor: '#fff',
+    },
     cartText: {
       textAlign: 'center',
-      color: '#3F3D56',
+    },
+    activeCartText:{
       fontWeight: 'bold',
+      color: '#FFF',
+    },
+    inactiveCartText:{
+      color: '#3F3D56',
     },
     validerButton: {
       width: 190,
@@ -30,15 +40,16 @@ const styles = () => {
     textAdress: {
       color: '#3F3D56',
     },
-    textPrice: {
-      color: '#3F3D56',
-      fontWeight: 'bold',
-      marginTop: 10,
-    },
     IconsText: {
-      color: '#3F3D56',
       textAlign: 'center',
     },
+    activeText:{
+      color: '#0B3D91',
+      fontWeight:'bold',
+    },
+    inactiveText:{
+      color: '#3F3D56',
+    }
   });
 };
 

@@ -14,11 +14,11 @@ import {
   FormControl,
   Divider,
 } from 'native-base';
+import {Formik} from 'formik';
 import AppartementIcon from '../assets/svg/AppartementIcon';
 import MaisonIcon from '../assets/svg/MaisonIcon';
 import ResidenceEtudiantIcon from '../assets/svg/ResidenceEtudiantIcon';
 import style from '../styles/AjoutPropriete';
-import {Formik} from 'formik';
 
 const validate = values => {
   const errors = {};
@@ -38,6 +38,7 @@ const validate = values => {
 
 function AjoutPropriete({navigation}) {
   const styles = style();
+  const [bien, setBien] = useState(null);
   const onSubmit = data => {
     console.log('submiting with ', data);
   };
@@ -102,27 +103,70 @@ function AjoutPropriete({navigation}) {
             Type de bien*
           </Text>
           <Row space={8} alignItems="center" justifyContent="flex-start">
-            <Pressable>
+            <Pressable
+              onPress={() =>
+                setBien(prev => (prev === 'appartement' ? null : 'appartement'))
+              }>
               <Column alignItems="center">
-                <AppartementIcon width={70} height={70} />
-                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                <AppartementIcon
+                  width={70}
+                  height={70}
+                  color={bien === 'appartement' ? '#0B3D91' : '#3F3D56'}
+                />
+                <Text
+                  fontSize="sm"
+                  style={[
+                    styles.IconsText,
+                    bien === 'appartement'
+                      ? styles.activeText
+                      : styles.inactiveText,
+                  ]}
+                  noOfLines={2}>
                   Appartement
                 </Text>
               </Column>
             </Pressable>
 
-            <Pressable>
+            <Pressable
+              onPress={() =>
+                setBien(prev => (prev === 'maison' ? null : 'maison'))
+              }>
               <Column alignItems="center">
-                <MaisonIcon width={70} height={70} />
-                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                <MaisonIcon
+                  width={70}
+                  height={70}
+                  color={bien === 'maison' ? '#0B3D91' : '#3F3D56'}
+                />
+                <Text
+                  fontSize="sm"
+                  style={[
+                    styles.IconsText,
+                    bien === 'maison' ? styles.activeText : styles.inactiveText,
+                  ]}
+                  noOfLines={2}>
                   Maison
                 </Text>
               </Column>
             </Pressable>
-            <Pressable>
+            <Pressable
+              onPress={() =>
+                setBien(prev => (prev === 'residence' ? null : 'residence'))
+              }>
               <Column alignItems="center">
-                <ResidenceEtudiantIcon width={70} height={70} />
-                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                <ResidenceEtudiantIcon
+                  width={70}
+                  height={70}
+                  color={bien === 'residence' ? '#0B3D91' : '#3F3D56'}
+                />
+                <Text
+                  fontSize="sm"
+                  style={[
+                    styles.IconsText,
+                    bien === 'residence'
+                      ? styles.activeText
+                      : styles.inactiveText,
+                  ]}
+                  noOfLines={2}>
                   Res. étudiante
                 </Text>
               </Column>
@@ -130,7 +174,7 @@ function AjoutPropriete({navigation}) {
           </Row>
           <Formik
             initialValues={{
-              typeBien: '',
+              typeBien: bien,
               adresseBien: '',
               ville: '',
               natureLocation: 'meuble',
@@ -138,7 +182,6 @@ function AjoutPropriete({navigation}) {
             onSubmit={onSubmit}
             validate={validate}>
             {({values, handleChange, handleBlur, handleSubmit, errors}) => (
-              
               <Column space={4}>
                 <FormControl isRequired isInvalid={'adresseBien' in errors}>
                   <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>

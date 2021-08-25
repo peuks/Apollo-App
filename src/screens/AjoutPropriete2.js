@@ -116,12 +116,12 @@ function AjoutPropriete2({navigation}) {
         <Formik
           initialValues={{
             piece: 'studio',
-            chambre: '0',
-            salleDeBain:'0',
-            salon: '0',
+            chambre: chambre,
+            salleDeBain:salleDeBain,
+            salon: salon,
             etage: 'rdc',
             superficie: '',
-            dateDisponibilite: '',
+            dateDisponibilite: date,
           }}
           onSubmit={onSubmit}
           validate={validate}>
@@ -304,7 +304,7 @@ function AjoutPropriete2({navigation}) {
               </FormControl>
               <FormControl isRequired isInvalid={'dateDisponibilite' in errors}>
                 <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-                  Date de disponibilité*
+                  Date de disponibilité
                 </FormControl.Label>
                 <Pressable
                   onPress={showDatepicker}
@@ -334,8 +334,8 @@ function AjoutPropriete2({navigation}) {
               </FormControl>
               <Row space={1}>
                 <Checkbox
-                  value="test"
-                  accessibilityLabel="This is a dummy checkbox"
+                  value="don't know"
+                  accessibilityLabel="je ne sais pas"
                 />
                 <Text style={{color: '#3F3D56'}} fontSize={16}>
                   Je ne sais pas
@@ -352,8 +352,8 @@ function AjoutPropriete2({navigation}) {
                 mb={10}
                 mt={6}
                 alignSelf="center"
-                //onPress={() => navigation.navigate('AjoutPropriete3')}
-                onPress={handleSubmit}
+                onPress={() => navigation.navigate('AjoutPropriete3')}
+                //onPress={handleSubmit}
                 >
                 Suivant
               </Button>
