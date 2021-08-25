@@ -6,7 +6,6 @@ import {
   Row,
   Image,
   SearchIcon,
-  SunIcon,
   View,
   Pressable,
 } from 'native-base';

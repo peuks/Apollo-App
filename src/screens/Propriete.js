@@ -724,7 +724,6 @@ function Propriete({navigation}) {
             <Text fontSize="lg" style={styles.descriptionTitle} mt={6}>
               Indice d'émission de gaz a effet de serre
             </Text>
-
             <Row justifyContent="space-evenly" mt={8}>
               <Button
                 size="sm"
@@ -733,7 +732,7 @@ function Propriete({navigation}) {
                 _text={{
                   color: '#FFF',
                 }}
-                onPress={() => navigation.navigate('Propriete')}>
+                onPress={() => setShowModalcandidat1(true)}>
                 Candidater
               </Button>
               <Button
@@ -743,7 +742,7 @@ function Propriete({navigation}) {
                 _text={{
                   color: '#0B3D91',
                 }}
-                onPress={() => setShowModal(true)}>
+                onPress={() => setShowModalContact(true)}>
                 Contacter
               </Button>
             </Row>

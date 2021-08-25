@@ -6,12 +6,10 @@ import {
   Row,
   Icon,
   Image,
-  SunIcon,
   ScrollView,
   Pressable,
   Center,
   View,
-  CircleIcon,
   Divider,
 } from 'native-base';
 import NewMessageIcon from '../assets/svg/NewMessageIcon';

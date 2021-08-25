@@ -18,7 +18,6 @@ import style from '../styles/Favoris';
 
 function Favoris({navigation}) {
   const styles = style();
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <Box flex={1} bg="#FAFAFA">

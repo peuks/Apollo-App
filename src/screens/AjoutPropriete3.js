@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Formik} from 'formik';
 import {
   Text,
   Box,
@@ -273,7 +274,9 @@ function AjoutPropriete3({navigation}) {
             mb={10}
             mt={6}
             alignSelf="center"
-            onPress={() => navigation.navigate('AjoutPropriete4')}>
+            onPress={() => navigation.navigate('AjoutPropriete4')}
+            //onPress={handleSubmit}
+            >
             Suivant
           </Button>
         </Column>

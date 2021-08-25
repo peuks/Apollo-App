@@ -44,9 +44,15 @@ const styles = () => {
       marginTop: 10,
     },
     IconsText: {
-      color: '#3F3D56',
       textAlign: 'center',
     },
+    activeText:{
+      color: '#0B3D91',
+      fontWeight:'bold',
+    },
+    inactiveText:{
+      color: '#3F3D56',
+    }
   });
 };
 

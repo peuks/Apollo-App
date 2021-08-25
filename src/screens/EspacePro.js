@@ -7,10 +7,10 @@ import {
   Button,
   Icon,
   Image,
-  SunIcon,
   ScrollView,
   Pressable,
   Switch,
+  Checkbox,
 } from 'native-base';
 import SurfaceSmIcon from '../assets/svg/SurfaceSmIcon';
 import MeubleSmIcon from '../assets/svg/MeubleSmIcon';
@@ -34,7 +34,7 @@ function EspacePro({navigation}) {
         <Row space={2} alignItems="center">
           <Column alignItems="center">
             <Pressable onPress={() => navigation.navigate('Compte')}>
-              <CompteIcon/>
+              <CompteIcon />
             </Pressable>
             <Text
               color="#3F3D56"
@@ -53,7 +53,7 @@ function EspacePro({navigation}) {
         <Row space={2}>
           <Column alignItems="center">
             <Pressable onPress={() => navigation.navigate('ViewLoc')}>
-              <SwitchIcon/>
+              <SwitchIcon />
             </Pressable>
             <Text color="#3F3D56" fontSize={10} fontWeight="bold">
               Mode locataire
@@ -86,7 +86,8 @@ function EspacePro({navigation}) {
               alignItems="center"
               justifyContent="center"
               style={styles.cardStatistics}
-              shadow={6}>
+              shadow={6}
+              onPress={() => navigation.navigate('ListeCandidaturePro')}>
               <Column alignItems="center" justifyContent="center">
                 <Text fontSize="4xl" style={styles.textTown}>
                   8
@@ -100,12 +101,15 @@ function EspacePro({navigation}) {
           <Text style={styles.textTown} fontSize={20} my={5}>
             Mes propriétés
           </Text>
-
-          {/* <Checkbox value="cgu" style={{fontSize:5,textAlign:'left',}}>
-            Afficher également les propriétés hors ligne
-          </Checkbox>
-          */}
-
+          <Row space={1} mb={5} mt={-2}>
+            <Checkbox
+              value="showOffLine"
+              accessibilityLabel="Show offline properties"
+            />
+            <Text style={{color: '#3F3D56'}} fontSize="sm">
+              Afficher également les propriétés hors ligne
+            </Text>
+          </Row>
           <Pressable
             mb={5}
             alignItems="center"
@@ -135,7 +139,7 @@ function EspacePro({navigation}) {
                 <Row space={5} mt={5}>
                   <Column>
                     <Box alignItems="center">
-                      <SurfaceSmIcon color="#3F3D56"/>
+                      <SurfaceSmIcon color="#3F3D56" />
                     </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
@@ -143,7 +147,7 @@ function EspacePro({navigation}) {
                   </Column>
                   <Column>
                     <Box alignItems="center">
-                      <MeubleSmIcon color="#3F3D56"/>
+                      <MeubleSmIcon color="#3F3D56" />
                     </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
@@ -151,7 +155,7 @@ function EspacePro({navigation}) {
                   </Column>
                   <Column>
                     <Box alignItems="center">
-                      <ChambreSmIcon color="#3F3D56"/>
+                      <ChambreSmIcon color="#3F3D56" />
                     </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
@@ -210,7 +214,7 @@ function EspacePro({navigation}) {
               width={401}
               height={155}
               roundedTop="lg"
-              style={{backgroundColor:"#0B3D91",opacity:0.5}}
+              style={{backgroundColor: '#0B3D91', opacity: 0.5}}
               onPress={() => navigation.navigate('ProprieteProLouee')}
             />
             <Text
@@ -221,8 +225,8 @@ function EspacePro({navigation}) {
               top={0}
               py={1}
               px={8}
-              m={[4 , 4, 30]}
-              style={{color: '#fff', backgroundColor: '#0B3D91',}}>
+              m={[4, 4, 30]}
+              style={{color: '#fff', backgroundColor: '#0B3D91'}}>
               LOUÉ
             </Text>
             <Row space={8} justifyContent="space-between" px={1} my={5}>
@@ -239,7 +243,7 @@ function EspacePro({navigation}) {
                 <Row space={5} mt={5}>
                   <Column>
                     <Box alignItems="center">
-                      <SurfaceSmIcon color="#3F3D56"/>
+                      <SurfaceSmIcon color="#3F3D56" />
                     </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       120 m2
@@ -247,7 +251,7 @@ function EspacePro({navigation}) {
                   </Column>
                   <Column>
                     <Box alignItems="center">
-                      <MeubleSmIcon color="#3F3D56"/>
+                      <MeubleSmIcon color="#3F3D56" />
                     </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       Meublé
@@ -255,7 +259,7 @@ function EspacePro({navigation}) {
                   </Column>
                   <Column>
                     <Box alignItems="center">
-                      <ChambreSmIcon color="#3F3D56"/>
+                      <ChambreSmIcon color="#3F3D56" />
                     </Box>
                     <Text fontSize="xs" style={styles.IconsText}>
                       3 ch.
@@ -272,7 +276,7 @@ function EspacePro({navigation}) {
                       Hors ligne
                     </Text>
                   </Row>
-                  <AlarmIcon  />
+                  <AlarmIcon />
                 </Row>
                 <Button
                   size="sm"

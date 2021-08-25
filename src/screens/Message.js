@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  NativeBaseProvider,
   Text,
   Box,
   Column,
@@ -8,7 +7,6 @@ import {
   Button,
   Icon,
   Image,
-  SearchIcon,
   Input,
 } from 'native-base';
 import style from '../styles/Message';

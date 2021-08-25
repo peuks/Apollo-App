@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//This import for date format
+import moment from 'moment';
 import {
   Text,
   Box,
@@ -15,15 +18,54 @@ import {
   InfoIcon,
   Pressable,
 } from 'native-base';
+import {Formik} from 'formik';
+import CalendrierIcon from '../assets/svg/CalendrierIcon';
 import style from '../styles/CreationContrat_3';
+
+const validate = values => {
+  const errors = {};
+
+  if (!values.numLot) {
+    errors.numLot = 'Ce champ est requis';
+  }
+  if (!values.prenom) {
+    errors.prenom = 'Ce champ est requis';
+  }
+  if (!values.email) {
+    errors.email = 'Ce champ est requis';
+  }
+  if (!values.tel) {
+    errors.tel = 'Ce champ est requis';
+  }
+  return errors;
+};
 
 function CreationContrat_3({navigation}) {
   const styles = style();
   const [typeBail, setTypeBail] = useState();
+  const [construction, setConstruction] = useState(null);
   const [destination, setDestination] = useState();
   const [regime, setRegime] = useState();
   const [modaliteChauffage, setModaliteChauffage] = useState();
   const [modaliteEau, setModaliteEau] = useState();
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    //Format the date
+    //const fCurrentDate = moment(new Date(currentDate)).format('DD-MM-YYYY');
+    setShow(Platform.OS === 'ios');
+    console.log('date :' + currentDate);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+  const onSubmit = data => {
+    console.log('submiting with ', data);
+  };
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -74,420 +116,373 @@ function CreationContrat_3({navigation}) {
       </Column>
 
       <ScrollView>
-        <Column mt={2} mx={4} space={5}>
-          <Text style={styles.textTown} fontSize={20} my={2}>
-            Modalités du contrat
-          </Text>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Type de bail*{" "} <InfoIcon size="xs" mt={1} />
-            </FormControl.Label>
-            <View
-              mt={2}
-              style={{
-                borderWidth: 1,
-                borderColor: '#000',
-                borderRadius: 6,
-                height: 55,
-              }}>
-              <Picker
-                selectedValue={typeBail}
-                onValueChange={(itemValue, itemIndex) => setTypeBail(itemValue)}>
-                <Picker.Item label="Meublé" value="meuble" />
-                <Picker.Item label="Vide" value="vide" />
-              </Picker>
-            </View>
-          </FormControl>
-          {/*
+        <Formik
+          initialValues={{
+            typeBail: 'meuble',
+            dureeBail: '',
+            dateDebut: date,
+            destinationLocaux: '',
+            regimeJuridique: '',
+            numLot: '',
+            periodeConstruction: '',
+            autrePartie: '',
+            modaliteChauffage: '',
+            raccord: '',
+          }}
+          onSubmit={onSubmit}
+          validate={validate}>
+          {({values, handleChange, handleBlur, handleSubmit, errors}) => (
+            <Column mt={2} mx={4} space={5}>
+              <Text style={styles.textTown} fontSize={20} my={2}>
+                Modalités du contrat
+              </Text>
+              <FormControl isRequired isInvalid={'typeBail' in errors}>
+                <Row>
+                  <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                    Type de bail
+                  </FormControl.Label>
+                  <InfoIcon size="xs" mt={1} />
+                </Row>
+
+                <View
+                  mt={2}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#000',
+                    borderRadius: 6,
+                    height: 55,
+                  }}>
+                  <Picker
+                    selectedValue={values.typeBail}
+                    onValueChange={handleChange('typeBail')}>
+                    <Picker.Item label="Meublé" value="meuble" />
+                    <Picker.Item label="Vide" value="vide" />
+                  </Picker>
+                </View>
+              </FormControl>
+              {/*
             Si meublé : durée bail = 9 mois pour un étudiant sinon 1 an
-            Si vide : durée bail = 3 ans   
+            Si vide : durée bail = 3 ans
           */}
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Durée du bail*
-            </FormControl.Label>
-            <Input size="md" style={styles.input} value="9 mois"/>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Date de début du contrat*
-            </FormControl.Label>
-            <Input type="date" size="md" style={styles.input} />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Destination des locaux*
-            </FormControl.Label>
-            <View
-              mt={2}
-              style={{
-                borderWidth: 1,
-                borderColor: '#000',
-                borderRadius: 6,
-                height: 55,
-              }}>
-              <Picker
-                selectedValue={destination}
-                onValueChange={(itemValue, itemIndex) => setDestination(itemValue)}>
-                <Picker.Item label="Mixe" value="mixe" />
-                <Picker.Item label="Habitation" value="habitation" />
-              </Picker>
-            </View>
-          </FormControl>
+              <FormControl isRequired isInvalid={'dureeBail' in errors}>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Durée du bail
+                </FormControl.Label>
+                <Input
+                  size="md"
+                  style={styles.input}
+                  value={'9 mois'}
+                  onChangeText={handleChange('dureeBail')}
+                  value={values.dureeBail}
+                />
+              </FormControl>
 
-          <Text style={styles.textTown} fontSize={20} my={2}>
-            Informations du bien
-          </Text>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Régime juridique de l’immeuble*
-            </FormControl.Label>
-            <View
-              mt={2}
-              style={{
-                borderWidth: 1,
-                borderColor: '#000',
-                borderRadius: 6,
-                height: 55,
-              }}>
-              <Picker
-                selectedValue={regime}
-                onValueChange={(itemValue, itemIndex) => setRegime(itemValue)}>
-                <Picker.Item label="Mono-propriété" value="monopropriete" />
-                <Picker.Item label="Copropriété" value="copropriete" />
-              </Picker>
-            </View>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Numéro de lot*
-            </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
-          </FormControl>
+              <FormControl>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Date de début du contrat*
+                </FormControl.Label>
+                <Pressable
+                  onPress={showDatepicker}
+                  mt={2}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#000',
+                    borderRadius: 6,
+                    height: 55,
+                  }}
+                  justifyContent="center">
+                  <Row space={5} px={2}>
+                    <CalendrierIcon />
+                    {show && (
+                      <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode="mode"
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                      />
+                    )}
+                    <Text mt={1}>{'' + moment(date).format('DD-MM-YYYY')}</Text>
+                  </Row>
+                </Pressable>
+              </FormControl>
+              <FormControl>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Destination des locaux*
+                </FormControl.Label>
+                <View
+                  mt={2}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#000',
+                    borderRadius: 6,
+                    height: 55,
+                  }}>
+                  <Picker
+                    selectedValue={destination}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setDestination(itemValue)
+                    }>
+                    <Picker.Item label="Mixe" value="mixe" />
+                    <Picker.Item label="Habitation" value="habitation" />
+                  </Picker>
+                </View>
+              </FormControl>
 
-          <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-            Période de construction ?*
-          </Text>
-          <Row space={2} justifyContent="space-evenly">
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Avant 1949
+              <Text style={styles.textTown} fontSize={20} my={2}>
+                Informations du bien
               </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                1949 - 1974
-              </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                1949 - 1989
-              </Text>
-            </Pressable>
-          </Row>
-          <Row space={4} justifyContent="flex-start" ml={2}>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                1989 - 2005
-              </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Après 2005
-              </Text>
-            </Pressable>
-          </Row>
+              <FormControl>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Régime juridique de l’immeuble*
+                </FormControl.Label>
+                <View
+                  mt={2}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#000',
+                    borderRadius: 6,
+                    height: 55,
+                  }}>
+                  <Picker
+                    selectedValue={regime}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setRegime(itemValue)
+                    }>
+                    <Picker.Item label="Mono-propriété" value="monopropriete" />
+                    <Picker.Item label="Copropriété" value="copropriete" />
+                  </Picker>
+                </View>
+              </FormControl>
+              <FormControl>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Numéro de lot*
+                </FormControl.Label>
+                <Input type="number" size="md" style={styles.input} />
+              </FormControl>
 
-          <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-            Le bien a-t-il d’autres parties ?*
-          </Text>
-          <Row space={2} justifyContent="space-evenly">
-            <Pressable
-              alignItems="center"
-              style={{
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-                width:110,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Garage
+              <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
+                Période de construction ?*
               </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Parking
-              </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Cave
-              </Text>
-            </Pressable>
-          </Row>
-          <Row space={4} justifyContent="flex-start" ml={2}>
-            <Pressable
-              alignItems="center"
-              style={{
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-                width:110,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Grenier
-              </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-                width:110,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Jardin
-              </Text>
-            </Pressable>
-          </Row>
+              <Row space={2} justifyContent="space-evenly">
+                <Pressable
+                  alignItems="center"
+                  onPress={() =>
+                    setConstruction(prev => (prev === 'studio' ? null : 'studio'))
+                  }
+                  style={
+                    construction === 'studio'
+                      ? styles.activelittlePressable
+                      : styles.littlePressable
+                  }>
+                  <Text
+                    style={ construction === 'studio' ? {color: '#FFF'}:{color:'#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Avant 1949
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    1949 - 1974
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    1949 - 1989
+                  </Text>
+                </Pressable>
+              </Row>
+              <Row space={4} justifyContent="flex-start" ml={2}>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    1989 - 2005
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Après 2005
+                  </Text>
+                </Pressable>
+              </Row>
 
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Modalité de chauffage de l’appartement ?*
-            </FormControl.Label>
-            <View
-              mt={2}
-              style={{
-                borderWidth: 1,
-                borderColor: '#000',
-                borderRadius: 6,
-                height: 55,
-              }}>
-              <Picker
-                selectedValue={modaliteChauffage}
-                onValueChange={(itemValue, itemIndex) => setModaliteChauffage(itemValue)}>
-                <Picker.Item label="Collectif" value="collectif" />
-                <Picker.Item label="Individuel" value="individuel" />
-              </Picker>
-            </View>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Modalité de production d’eau chaude ?*
-            </FormControl.Label>
-            <View
-              mt={2}
-              style={{
-                borderWidth: 1,
-                borderColor: '#000',
-                borderRadius: 6,
-                height: 55,
-              }}>
-              <Picker
-                selectedValue={modaliteEau}
-                onValueChange={(itemValue, itemIndex) => setModaliteEau(itemValue)}>
-                <Picker.Item label="Collectif" value="collectif" />
-                <Picker.Item label="Individuel" value="individuel" />
-              </Picker>
-            </View>
-          </FormControl>
-          <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
-            L'appartement est-il raccordé à :
-          </Text>
-          <Row space={2} justifyContent="space-evenly">
-            <Pressable
-              alignItems="center"
-              style={{
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-                width:110,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Fibre
+              <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
+                Le bien a-t-il d’autres parties ?*
               </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                TNT
-              </Text>
-            </Pressable>
-            <Pressable
-              alignItems="center"
-              style={{
-                width:110,
-                borderWidth: 1,
-                borderColor: '#fff',
-                elevation: 2,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-              }}>
-              <Text
-                style={{color: '#3F3D56'}}
-                fontSize={14}
-                my={2}
-                px={4}
-                py={2}>
-                Câble
-              </Text>
-            </Pressable>
-          </Row>
+              <Row space={2} justifyContent="space-evenly">
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Garage
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Parking
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Cave
+                  </Text>
+                </Pressable>
+              </Row>
+              <Row space={4} justifyContent="flex-start" ml={2}>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Grenier
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Jardin
+                  </Text>
+                </Pressable>
+              </Row>
 
-          <Button
-            size="lg"
-            style={styles.suivantButton}
-            borderRadius="pill"
-            _text={{
-              color: '#FFF',
-            }}
-            mb={10}
-            mt={6}
-            alignSelf="center"
-            onPress={() => navigation.navigate('CreationContrat_4')}>
-            Suivant
-          </Button>
-        </Column>
+              <FormControl>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Modalité de chauffage de l’appartement ?*
+                </FormControl.Label>
+                <View
+                  mt={2}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#000',
+                    borderRadius: 6,
+                    height: 55,
+                  }}>
+                  <Picker
+                    selectedValue={modaliteChauffage}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setModaliteChauffage(itemValue)
+                    }>
+                    <Picker.Item label="Collectif" value="collectif" />
+                    <Picker.Item label="Individuel" value="individuel" />
+                  </Picker>
+                </View>
+              </FormControl>
+              <FormControl>
+                <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                  Modalité de production d’eau chaude ?*
+                </FormControl.Label>
+                <View
+                  mt={2}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#000',
+                    borderRadius: 6,
+                    height: 55,
+                  }}>
+                  <Picker
+                    selectedValue={modaliteEau}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setModaliteEau(itemValue)
+                    }>
+                    <Picker.Item label="Collectif" value="collectif" />
+                    <Picker.Item label="Individuel" value="individuel" />
+                  </Picker>
+                </View>
+              </FormControl>
+              <Text style={{color: '#3F3D56'}} fontSize={16} my={2}>
+                L'appartement est-il raccordé à :
+              </Text>
+              <Row space={2} justifyContent="space-evenly">
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Fibre
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    TNT
+                  </Text>
+                </Pressable>
+                <Pressable alignItems="center" style={styles.littlePressable}>
+                  <Text
+                    style={{color: '#3F3D56'}}
+                    fontSize={14}
+                    my={2}
+                    px={4}
+                    py={2}>
+                    Câble
+                  </Text>
+                </Pressable>
+              </Row>
+
+              <Button
+                size="lg"
+                style={styles.suivantButton}
+                borderRadius="pill"
+                _text={{
+                  color: '#FFF',
+                }}
+                mb={10}
+                mt={6}
+                alignSelf="center"
+                onPress={() => navigation.navigate('CreationContrat_4')}>
+                Suivant
+              </Button>
+            </Column>
+          )}
+        </Formik>
       </ScrollView>
     </Box>
   );

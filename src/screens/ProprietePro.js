@@ -7,7 +7,6 @@ import {
   Row,
   Button,
   Image,
-  SunIcon,
   Divider,
   ArrowBackIcon,
   ScrollView,

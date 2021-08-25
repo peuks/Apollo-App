@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Picker} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {
   Text,
   Box,
@@ -13,17 +13,38 @@ import {
   ScrollView,
   FormControl,
   Divider,
-  Select,
-  CheckIcon,
 } from 'native-base';
+import {Formik} from 'formik';
 import AppartementIcon from '../assets/svg/AppartementIcon';
 import MaisonIcon from '../assets/svg/MaisonIcon';
 import ResidenceEtudiantIcon from '../assets/svg/ResidenceEtudiantIcon';
 import style from '../styles/AjoutPropriete';
 
+const validate = values => {
+  const errors = {};
+
+  if (!values.adresseBien) {
+    errors.adresseBien = 'Ce champ est requis';
+  }
+  if (!values.ville) {
+    errors.ville = 'Ce champ est requis';
+  }
+  if (values.adresseBien.length > 0 && values.adresseBien.length < 3) {
+    errors.adresseBien = 'La chaîne doit avoir minimum 3 caractères';
+  }
+
+  return errors;
+};
+
 function AjoutPropriete({navigation}) {
   const styles = style();
-  const [natureLocation,setNatureLocation] = useState();
+  const [bien, setBien] = useState(null);
+  const onSubmit = data => {
+    console.log('submiting with ', data);
+  };
+
+  //const [natureLocation, setNatureLocation] = useState('vide');
+
   return (
     <Box flex={1} bg="#FFF">
       <Row
@@ -82,79 +103,154 @@ function AjoutPropriete({navigation}) {
             Type de bien*
           </Text>
           <Row space={8} alignItems="center" justifyContent="flex-start">
-            <Pressable>
+            <Pressable
+              onPress={() =>
+                setBien(prev => (prev === 'appartement' ? null : 'appartement'))
+              }>
               <Column alignItems="center">
-                <AppartementIcon width={70} height={70} />
-                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                <AppartementIcon
+                  width={70}
+                  height={70}
+                  color={bien === 'appartement' ? '#0B3D91' : '#3F3D56'}
+                />
+                <Text
+                  fontSize="sm"
+                  style={[
+                    styles.IconsText,
+                    bien === 'appartement'
+                      ? styles.activeText
+                      : styles.inactiveText,
+                  ]}
+                  noOfLines={2}>
                   Appartement
                 </Text>
               </Column>
             </Pressable>
-            <Pressable>
+
+            <Pressable
+              onPress={() =>
+                setBien(prev => (prev === 'maison' ? null : 'maison'))
+              }>
               <Column alignItems="center">
-                <MaisonIcon width={70} height={70} />
-                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                <MaisonIcon
+                  width={70}
+                  height={70}
+                  color={bien === 'maison' ? '#0B3D91' : '#3F3D56'}
+                />
+                <Text
+                  fontSize="sm"
+                  style={[
+                    styles.IconsText,
+                    bien === 'maison' ? styles.activeText : styles.inactiveText,
+                  ]}
+                  noOfLines={2}>
                   Maison
                 </Text>
               </Column>
             </Pressable>
-            <Pressable>
+            <Pressable
+              onPress={() =>
+                setBien(prev => (prev === 'residence' ? null : 'residence'))
+              }>
               <Column alignItems="center">
-                <ResidenceEtudiantIcon width={70} height={70} />
-                <Text fontSize="sm" style={styles.IconsText} noOfLines={2}>
+                <ResidenceEtudiantIcon
+                  width={70}
+                  height={70}
+                  color={bien === 'residence' ? '#0B3D91' : '#3F3D56'}
+                />
+                <Text
+                  fontSize="sm"
+                  style={[
+                    styles.IconsText,
+                    bien === 'residence'
+                      ? styles.activeText
+                      : styles.inactiveText,
+                  ]}
+                  noOfLines={2}>
                   Res. étudiante
                 </Text>
               </Column>
             </Pressable>
           </Row>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Adresse du bien*
-            </FormControl.Label>
-            <Input type="text" size="md" style={styles.input} />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Ville*
-            </FormControl.Label>
-            <Input type="number" size="md" style={styles.input} />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
-              Nature de la location*
-            </FormControl.Label>
-            <View
-              mt={2}
-              style={{
-                borderWidth: 1,
-                borderColor: '#000',
-                borderRadius: 6,
-                height: 55,
-              }}>
-              <Picker
-                selectedValue={natureLocation}
-                onValueChange={(itemValue, itemIndex) =>
-                  setNatureLocation(itemValue)
-                }>
-                <Picker.Item label="Meublée" value="meublee" />
-                <Picker.Item label="Vide" value="vide" />
-              </Picker>
-            </View>
-          </FormControl>
-
-          <Button
-            size="lg"
-            style={styles.suivantButton}
-            borderRadius="pill"
-            _text={{
-              color: '#FFF',
+          <Formik
+            initialValues={{
+              typeBien: bien,
+              adresseBien: '',
+              ville: '',
+              natureLocation: 'meuble',
             }}
-            mb={10}
-            mt={6}
-            alignSelf="center"
-            onPress={() => navigation.navigate('AjoutPropriete2')}>
-            Suivant
-          </Button>
+            onSubmit={onSubmit}
+            validate={validate}>
+            {({values, handleChange, handleBlur, handleSubmit, errors}) => (
+              <Column space={4}>
+                <FormControl isRequired isInvalid={'adresseBien' in errors}>
+                  <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                    Adresse du bien
+                  </FormControl.Label>
+                  <Input
+                    type="text"
+                    size="md"
+                    style={styles.input}
+                    onChangeText={handleChange('adresseBien')}
+                    value={values.adresseBien}
+                  />
+                  <FormControl.ErrorMessage>
+                    {errors.adresseBien}
+                  </FormControl.ErrorMessage>
+                </FormControl>
+                <FormControl isRequired isInvalid={'ville' in errors}>
+                  <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                    Ville
+                  </FormControl.Label>
+                  <Input
+                    type="text"
+                    size="md"
+                    style={styles.input}
+                    onChangeText={handleChange('ville')}
+                    value={values.ville}
+                  />
+                  <FormControl.ErrorMessage>
+                    {errors.ville}
+                  </FormControl.ErrorMessage>
+                </FormControl>
+                <FormControl isRequired isInvalid={'natureLocation' in errors}>
+                  <FormControl.Label _text={{color: '#3F3D56', fontSize: 'md'}}>
+                    Nature de la location
+                  </FormControl.Label>
+                  <View
+                    mt={2}
+                    style={{
+                      borderWidth: 1,
+                      borderColor: '#000',
+                      borderRadius: 6,
+                      height: 55,
+                    }}>
+                    <Picker
+                      selectedValue={values.natureLocation}
+                      onValueChange={handleChange('natureLocation')}>
+                      <Picker.Item label="Meublée" value="meublee" />
+                      <Picker.Item label="Vide" value="vide" />
+                    </Picker>
+                  </View>
+                </FormControl>
+                <Button
+                  size="lg"
+                  style={styles.suivantButton}
+                  borderRadius="pill"
+                  _text={{
+                    color: '#FFF',
+                  }}
+                  mb={10}
+                  mt={6}
+                  alignSelf="center"
+                  onPress={() => { navigation.navigate('AjoutPropriete2'); handleSubmit}}
+                  //onPress={handleSubmit}
+                  >
+                  Suivant
+                </Button>
+              </Column>
+            )}
+          </Formik>
         </Column>
       </ScrollView>
     </Box>
